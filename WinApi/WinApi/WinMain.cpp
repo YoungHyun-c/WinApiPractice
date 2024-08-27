@@ -32,115 +32,144 @@ EX)
 #pragma endregion  
 
 #include <Windows.h>
+#include <tchar.h>
 
-#define MAX_LOADSTRING 100
+// 전역 변수
+/*
+ 인스턴스
+ -> 윈도우 OS가 현재 실행되고 있는 프로그램을 확인하기 위한 값.
+ -> 같은 프로그램이면 일반적으로 같은 인스턴스 값을 가진다.
+ -> 클래스가 메모리에 실제로 구현된 실체.
+ -> 실행되고 있는 각각의 프로그램들.
+*/
 
-// 전역 변수:
-HINSTANCE hInst;                                // 현재 인스턴스입니다.
-WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
-WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+HINSTANCE _hInstance;
+// 핸들 : 윈도우 창을 의미한다.
+HWND _hwnd;
+// 윈도우 타이틀
+LPTSTR _lpszClass = TEXT("Windows API");
+// TCHAR* pszString = _T("Windows API");
 
-// 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
-ATOM                MyRegisterClass(HINSTANCE hInstance);
-BOOL                InitInstance(HINSTANCE, int);
-LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+/*
+LPSTR -> Long Pointer STR  -> char*
+LPCSTR -> Long Pointer Const STR -> const char*
+LPCTSTR -> const tchar*
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-    _In_opt_ HINSTANCE hPrevInstance,
-    _In_ LPWSTR    lpCmdLine,
-    _In_ int       nCmdShow)
+▶ TCHAR
+ -> 이 자료형은 프로젝트 문자셋 설정에 따라 자동적으로 변환을 해주는 중간 매크로 자료형
+ -> Type Casting 을 유발하며, char 또는 Wchar_t로 변환한다.
+
+ -> 멀티와 유니 환경에서 별도의 수정 작업 없이 프로그램을 구동하기 위해서는 TCHAR형으로
+  문자열을 표현하는 것을 권장한다.
+
+ -> 윈도우 어플리케이션을 사용하는 프로그램부터는 응용 프로그램에서 문자열 상수를 쓰기 위해서는 중간 설정에 따라
+ char* -> wchar_t* 로 변환을 해주는 _T 매크로도 유효하다.
+
+ // 전역 변수:
+HINSTANCE hInst;
+HWND _hwnd;
+LPTSTR _lps2Class = TEXT("Windows API");
+TCHAR* ps2String = _T("Windows API");
+
+LPCSTR Scrpit1 = "ABC";
+LPCWSTR Scrpit2 = L"ABC";
+TCHAR* Scrpit3 = _T("ABC"); // 자동으로 바꿔 주지만, 절차가 생겨 느리다.
+*/
+
+// 콜백 함수
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+
+/*
+hInstance 프로그램 인스턴스 핸들
+hPrevInstance 이전에 실행된 인스턴스 핸들
+IpszCmdParam 명령형으로 입력한 프로그램 인자(수)
+nCmdShow 프로그램이 시작될 형태 (최소화 / 보통 크기 등등...)
+*/
+
+// wWinMain world wide를 진입점으로 바꾸겠다.
+int APIENTRY WinMain(HINSTANCE hInstance,
+                     HINSTANCE hPrevInstance,
+                     LPSTR    lpszCmdParam,
+                     int       nCmdShow)
 {
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+    _hInstance = hInstance;
 
-    // TODO: 여기에 코드를 입력합니다.
+    /*
+    winMain의 역할
+    ㄴ 1. 윈도우 창을 세팅 후 화면에 띄우기.
+        -> 화면에 창을 띄우기 위해서는 4가지 처리가 선행되어야 한다.
+    ㄴ 2. 메세지 루프
+    */
 
-    // 전역 문자열을 초기화합니다.
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_WINAPITEST, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
+    // 1-1 윈도우창 구조체 선언 및 초기화
+    WNDCLASS wndClass;
+    wndClass.cbClsExtra = 0; // 클래스에 대한 여분 메모리를 할당 할꺼냐. // 클래스 여분 메모리
+    wndClass.cbWndExtra = 0; // 윈도우 ``                             // 윈도우 여분 메모리
+    wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH); // 배경색을 정의한다.  // 백그라운드
+    wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);                                     // 마우스
+    wndClass.hIcon = LoadIcon(hInstance, IDI_APPLICATION); // 화면 왼쪽 위의 아이콘을 다른 곳에서 소스를 불러와 띄우겠다. // 아이콘
+    wndClass.hInstance = hInstance; // 윈도우 인스턴스                                   // 소유한 식별자 정보.
+    wndClass.lpfnWndProc = (WNDPROC)WndProc; // Long Pointer Function Numbering Window Pocedure  // 윈도우 프로시저
+    wndClass.lpszClassName = _lpszClass; // 윈도우 창 이름.                              // 클래스 이름.
+    wndClass.lpszMenuName = NULL; // 우측의 메뉴 상자. (최소화, 닫기) // 메뉴이름.
+    wndClass.style = CS_HREDRAW | CS_VREDRAW;                                           // 윈도우 스타일
 
-    // 애플리케이션 초기화를 수행합니다:
-    if (!InitInstance(hInstance, nCmdShow))
+    // 1-2 윈도우 클래스 등록
+    RegisterClass(&wndClass);
+
+    // 1-3 화면에 보여줄 윈도우 창 생성.
+    _hwnd = CreateWindowW
+    (
+        _lpszClass,                 // 윈도우 클래스 식별자
+        _lpszClass,                 // 윈도우 타이틀 바 이름
+        WS_OVERLAPPEDWINDOW,        // 윈도우 스타일
+        400,                        // 윈도우 화면 X 좌표
+        100,                        // 윈도우 화면 Y 좌표
+        800,                        // 윈도우 화면 가로크기.
+        800,                        // 윈도우 화면 세로크기
+        NULL,         // 부모 윈도우 -> NULL, GetDesktopWindow(), 윈도우 창이 여러개(게임창, 아이템경매장창 등) 필요하면 사용하게 되는 용도이다.
+        (HMENU)NULL,                // 메뉴 핸들
+        hInstance,                  // 인스턴스 지정
+        NULL                        // 윈도우의 자식 윈도우를 생성하면 지정 / 아니라면 NULL
+    );
+
+    // 1-4 화면에 윈도우창 보여주기
+    ShowWindow(_hwnd, nCmdShow);
+    // ex) 플레이어의 위치가 바뀌었을 때 등등 업데이트 (갱신용)
+    //UpdateWindow(_hwnd);
+
+    // MSG : 운영체제에서 발생하는 메세지 정보를 저장하기 위한 구조체.
+    MSG message;
+    // ZeroMemory(&message, nCmdShow);
+
+    // ★★★★★
+    // 2. 기본 메시지 루프.
+    
+    // GetMessage : 메세지를 꺼내올 수 있을때까지 대기.
+    // ㄴ 메세지 큐로부터 하나의 메세지를 가져오는 역할을 수행한다.
+    // ㄴ 다만 메세지 큐가 비어있을 경우 메세지가 들어올때까지 대기.
+
+    // - PeekMessage : 메세지가 없더라도 반환이 된다. -> 게임에서 쓰인다.
+
+    while (GetMessage(&message, 0, 0, 0))
     {
-        return FALSE;
+        //if (!TranslateAccelerator(message.hwnd, hAccelTable, &message)) // 시동코드
+        TranslateMessage(&message);
+        DispatchMessage(&message);
     }
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINAPITEST));
+    /*
+    TranslateMessage : 키보드의 입력 메세지 처리를 담당한다. 입력된 키가 문자 키인지 확인하고, 대문자 혹은 소문자,
+    한글, 영문인지에 대한 wM_CHAR 메세지를 발생 시킨다.
 
-    MSG msg;
+    DispatchMessage : 윈도우 프로시저에서 전달된 메세지를 실제 윈도우로 전달한다.
+    */
 
-    // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
-
-    return (int)msg.wParam;
+    return (int)message.wParam;
 }
 
 
 
-//
-//  함수: MyRegisterClass()
-//
-//  용도: 창 클래스를 등록합니다.
-//
-ATOM MyRegisterClass(HINSTANCE hInstance)
-{
-    WNDCLASSEXW wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-
-    wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = WndProc;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINAPITEST));
-    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_WINAPITEST);
-    wcex.lpszClassName = szWindowClass;
-    wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-
-    return RegisterClassExW(&wcex);
-}
-
-//
-//   함수: InitInstance(HINSTANCE, int)
-//
-//   용도: 인스턴스 핸들을 저장하고 주 창을 만듭니다.
-//
-//   주석:
-//
-//        이 함수를 통해 인스턴스 핸들을 전역 변수에 저장하고
-//        주 프로그램 창을 만든 다음 표시합니다.
-//
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
-{
-    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
-
-    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-
-    if (!hWnd)
-    {
-        return FALSE;
-    }
-
-    ShowWindow(hWnd, nCmdShow);
-    UpdateWindow(hWnd);
-
-    return TRUE;
-}
-
-//
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
 //  용도: 주 창의 메시지를 처리합니다.
@@ -150,42 +179,45 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+
+// 윈도우 프로시저
+// hwnd : 어느 윈도우에서 발생한 메세지 인지 구분.
+// IMessage : 메세지 구분 번호
+// wParam : unsigned int 마우스 버튼의 상태 / 키보드 조합 키의 상태를 전달한다.
+// lParam : unsigned long 마우스 클릭 좌표를 전달
+LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
 {
-    switch (message)
+    /*
+    Window Procedure
+
+    - 메세지를 운영체제에 전달 -> 운영체제는 강제로 호출이 된다.
+       ㄴ WinMain이 아닌 운영체제에 의해 호출이 되는 콜백 함수라고 할 수 있다.
+       ㄴ 윈도우를 생성할때는 반드시 지정을 해주어야 한다.
+
+    - 윈도우 프로시저 내부에서는 윈도우에서 발생한 모든 메세지를 처리한느 것이 아니라 특정 메세지만을 처리하고,
+    나머지 메세지는 DefWindowProc 함수가 처리하도록 로직을 설계하는 것이 일반적.    
+    */
+
+    switch (IMessage)
     {
-    case WM_COMMAND:
-    {
-        int wmId = LOWORD(wParam);
-        // 메뉴 선택을 구문 분석합니다:
-        switch (wmId)
-        {
-        case IDM_ABOUT:
-            DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-            break;
-        case IDM_EXIT:
-            DestroyWindow(hWnd);
-            break;
-        default:
-            return DefWindowProc(hWnd, message, wParam, lParam);
-        }
-    }
-    break;
-    case WM_PAINT:
-    {
-        PAINTSTRUCT ps;
-        HDC hdc = BeginPaint(hWnd, &ps);
-        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-        EndPaint(hWnd, &ps);
-    }
-    break;
+    case WM_CREATE: // 생성자
+        break;
+    //case WM_PAINT: // 그리는기능
+    //{
+    //    PAINTSTRUCT ps;
+    //    HDC hdc = BeginPaint(hWnd, &ps);
+    //    // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+    //    EndPaint(hWnd, &ps);
+    //}
+    //break;
     case WM_DESTROY:
+        // PostQuitMessage : 이 함수는 메세지 큐에 QUIT 메세지를 보내는 역할을 수행.
+        // Quit 메세지를 수신하는 순간 GetMessage가 FALSE를 반환하므로 메세지 루프는 종료된다.
         PostQuitMessage(0);
         break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
     }
-    return 0;
+    
+    return (DefWindowProc(hWnd, IMessage, wParam, lParam));
 }
 
 // 정보 대화 상자의 메시지 처리기입니다.
@@ -207,3 +239,18 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
     return (INT_PTR)FALSE;
 }
+
+
+
+/*
+과제1.
+
+한줄 조사.
+- 노트에 열심히 적어온다. (+공부)
+ ㄴ CallBack Function에 대해서, DC, GetDC, ReleaseDC, BeginPaint / EndPaint, WM_PAINT, PAINTSTRUCT
+
+ 타임어택. 윈도우 창 만들기
+ - 시간은 10분.
+ -> 실패시 깜지 -> 못한 인원 x 2
+
+*/
