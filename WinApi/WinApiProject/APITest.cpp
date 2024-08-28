@@ -189,6 +189,83 @@ void PrintMyName(HDC hdc, int& _Num)
     }
 }
 
+void PrintUnreal(HDC hdc)
+{
+    // U
+    MoveToEx(hdc, 50, 450, NULL);
+    LineTo(hdc, 50, 520);
+    MoveToEx(hdc, 100, 450, NULL);
+    LineTo(hdc, 100, 520);
+    MyDownHalfCircle(hdc, 75, 520, 25);
+
+    // n
+    MoveToEx(hdc, 130, 500, NULL);
+    LineTo(hdc, 130, 550);
+    MoveToEx(hdc, 180, 500, NULL);
+    LineTo(hdc, 180, 550);
+    MyUpHalfCircle(hdc, 155, 500, 25);
+
+    // r
+    MoveToEx(hdc, 210, 500, NULL);
+    LineTo(hdc, 210, 550);
+    MyUpHalfCircle(hdc, 235, 525, 25);
+
+    // e
+    MoveToEx(hdc, 280, 525, NULL);
+    LineTo(hdc, 325, 525);
+    MyAngle(hdc, 300, 525, 25, 310);
+
+    // a
+    MyUpHalfCircle(hdc, 360, 510, 25);
+    MyCircle(hdc, 360, 535, 25);
+    MoveToEx(hdc, 385, 510, NULL);
+    LineTo(hdc, 385, 555);
+
+    // l
+    MoveToEx(hdc, 410, 450, NULL);
+    LineTo(hdc, 410, 555);
+
+    // E
+    MoveToEx(hdc, 320, 625, NULL);
+    LineTo(hdc, 365, 625);
+    MoveToEx(hdc, 320, 655, NULL);
+    LineTo(hdc, 365, 655);
+    MoveToEx(hdc, 320, 685, NULL);
+    LineTo(hdc, 365, 685);
+    MoveToEx(hdc, 320, 625, NULL);
+    LineTo(hdc, 320, 685);
+
+    // n
+    MoveToEx(hdc, 400, 655, NULL);
+    LineTo(hdc, 400, 680);
+    MoveToEx(hdc, 450, 655, NULL);
+    LineTo(hdc, 450, 680);
+    MyUpHalfCircle(hdc, 425, 660, 25);
+
+    // g
+    MyCircle(hdc, 500, 660, 25);
+    MoveToEx(hdc, 525, 650, NULL);
+    LineTo(hdc, 525, 700);
+    MyDownHalfCircle(hdc, 500, 700, 25);
+
+    // i
+    MyCircle(hdc, 550, 620, 5);
+    MoveToEx(hdc, 550, 640, NULL);
+    LineTo(hdc, 550, 690);
+
+    // n
+    MoveToEx(hdc, 580, 655, NULL);
+    LineTo(hdc, 580, 680);
+    MoveToEx(hdc, 630, 655, NULL);
+    LineTo(hdc, 630, 680);
+    MyUpHalfCircle(hdc, 605, 660, 25);
+
+    //e
+    MoveToEx(hdc, 645, 655, NULL);
+    LineTo(hdc, 690, 655);
+    MyAngle(hdc, 665, 655, 25, 310);
+}
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
 {
     HDC hdc;
@@ -197,6 +274,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     static int Num = 0;
 
     RECT rc = { 0 + (250 * Num), 0, (250 + (300 * Num)), 400 };
+
+    
 
     switch (IMessage)
     {
@@ -209,88 +288,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
         // 가운데 선.
         MoveToEx(hdc, 0, 400, NULL);
         LineTo(hdc, 800, 400);
-
         // Unreal Engine
         {
-            // U
-            MoveToEx(hdc, 50, 450, NULL);
-            LineTo(hdc, 50, 520);
-            MoveToEx(hdc, 100, 450, NULL);
-            LineTo(hdc, 100, 520);
-            MyDownHalfCircle(hdc, 75, 520, 25);
-
-            // n
-            MoveToEx(hdc, 130, 500, NULL);
-            LineTo(hdc, 130, 550);
-            MoveToEx(hdc, 180, 500, NULL);
-            LineTo(hdc, 180, 550);
-            MyUpHalfCircle(hdc, 155, 500, 25);
-
-            // r
-            MoveToEx(hdc, 210, 500, NULL);
-            LineTo(hdc, 210, 550);
-            MyUpHalfCircle(hdc, 235, 525, 25);
-
-            // e
-            MoveToEx(hdc, 280, 525, NULL);
-            LineTo(hdc, 325, 525);
-            MyAngle(hdc, 300, 525, 25, 310);
-            
-            // a
-            MyUpHalfCircle(hdc, 360, 510, 25);
-            MyCircle(hdc, 360, 535, 25);
-            MoveToEx(hdc, 385, 510, NULL);
-            LineTo(hdc, 385, 555);
-            
-            // l
-            MoveToEx(hdc, 410, 450, NULL);
-            LineTo(hdc, 410, 555);
-
-            // E
-            MoveToEx(hdc, 320, 625, NULL);
-            LineTo(hdc, 365, 625);
-            MoveToEx(hdc, 320, 655, NULL);
-            LineTo(hdc, 365, 655);
-            MoveToEx(hdc, 320, 685, NULL);
-            LineTo(hdc, 365, 685);
-            MoveToEx(hdc, 320, 625, NULL);
-            LineTo(hdc, 320, 685);
-
-            // n
-            MoveToEx(hdc, 400, 655, NULL);
-            LineTo(hdc, 400, 680);
-            MoveToEx(hdc, 450, 655, NULL);
-            LineTo(hdc, 450, 680);
-            MyUpHalfCircle(hdc, 425, 660, 25);
-
-            // g
-            MyCircle(hdc, 500, 660, 25);
-            MoveToEx(hdc, 525, 650, NULL);
-            LineTo(hdc, 525, 700);
-            MyDownHalfCircle(hdc, 500, 700, 25);
-
-            // i
-            MyCircle(hdc, 550, 620, 5);
-            MoveToEx(hdc, 550, 640, NULL);
-            LineTo(hdc, 550, 690);
-
-            // n
-            MoveToEx(hdc, 580, 655, NULL);
-            LineTo(hdc, 580, 680);
-            MoveToEx(hdc, 630, 655, NULL);
-            LineTo(hdc, 630, 680);
-            MyUpHalfCircle(hdc, 605, 660, 25);
-            
-            //e
-            MoveToEx(hdc, 645, 655, NULL);
-            LineTo(hdc, 690, 655);
-            MyAngle(hdc, 665, 655, 25, 310);
+            PrintUnreal(hdc);
         }
-
-
-        //MyAngle(hdc, 200, 500, 50, 310);
-
-
         EndPaint(hWnd, &ps);
     }
     break;
