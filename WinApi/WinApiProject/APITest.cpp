@@ -2,6 +2,7 @@
 #include <tchar.h>
 #include <cmath>
 
+#define CirCleSize 50
 
 HINSTANCE _hInstance;
 // 핸들 : 윈도우 창을 의미한다.
@@ -69,33 +70,46 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     return (int)message.wParam;
 }
 
-void MyCircle(HDC _hdc, float _X, float _Y, float _R)
+void MyCircle(HDC _hdc, int _X, int _Y, int _R)
 {
-    float R = pow(_R, 2);
+    int R = _R;
     for (int i = 0; i < 361; i++)
     {
-        MoveToEx(_hdc, _X + (cos(i) * R), _Y + (sin(i) * R), NULL);
-        LineTo(_hdc, _X + 1.0f + (cos(i) * R), _Y + 1.0f + (sin(i) * R));
+        MoveToEx(_hdc, _X + static_cast<int>(cos(i) * R), _Y + static_cast<int>(sin(i) * R), NULL);
+        LineTo(_hdc, _X + 1 + static_cast<int>(cos(i) * R), _Y + 1 + static_cast<int>(sin(i) * R));
     }
 }
 
-void MyUpHalfCircle(HDC _hdc, float _X, float _Y, float _R)
+void MyUpHalfCircle(HDC _hdc, int _X, int _Y, int _R)
 {
-    float R = pow(_R, 2);
-    for (int i = 0; i < 181; i++)
+    int R = _R;
+    for (int i = 0; i < 361; i++)
     {
-        MoveToEx(_hdc, _X + (cos(i) * R), _Y - abs(sin(i) * R), NULL);
-        LineTo(_hdc, _X + 1.0f + (cos(i) * R), _Y + 1.0f - abs(sin(i) * R));
+        MoveToEx(_hdc, _X + static_cast<int>(cos(i) * R), _Y - abs(static_cast<int>(sin(i) * R)), NULL);
+        LineTo(_hdc, _X + 1 + static_cast<int>(cos(i) * R), _Y + 1 - abs(static_cast<int>(sin(i) * R)));
     }
 }
 
-void MyDownHalfCircle(HDC _hdc, float _X, float _Y, float _R)
+void MyDownHalfCircle(HDC _hdc, int _X, int _Y, int _R)
 {
-    float R = pow(_R, 2);
-    for (int i = 0; i < 181; i++)
+    int R = _R;
+    for (int i = 0; i < 361; i++)
     {
-        MoveToEx(_hdc, _X + (cos(i) * R), _Y + abs(sin(i) * R), NULL);
-        LineTo(_hdc, _X + 1.0f + (cos(i) * R), _Y + 1.0f + abs(sin(i) * R));
+        MoveToEx(_hdc, _X + static_cast<int>(cos(i) * R), _Y + abs(static_cast<int>(sin(i) * R)), NULL);
+        LineTo(_hdc, _X + 1 + static_cast<int>(cos(i) * R), _Y + 1 + abs(static_cast<int>(sin(i) * R)));
+    }
+}
+
+void MyAngle(HDC _hdc, int _X, int _Y, int _R, int _Angle)
+{
+    double PI = 3.14;
+    for (float i = 0; i < _Angle; i++)
+    {
+        double radian = i * (PI / 180.0);
+        int x = _X + static_cast<int>(_R * cos(radian));
+        int y = _Y - static_cast<int>(_R * sin(radian));
+        MoveToEx(_hdc, x, y, NULL);
+        LineTo(_hdc, x + 1, y + 1);
     }
 }
 
@@ -111,7 +125,7 @@ void PrintMyName(HDC hdc, int& _Num)
             MoveToEx(hdc, 45, 60, NULL);
             LineTo(hdc, 210, 60);
 
-            MyCircle(hdc, 120, 130, 7); // ㅎ
+            MyCircle(hdc, 120, 130, CirCleSize); // ㅎ
 
             MoveToEx(hdc, 120, 190, NULL); // |
             LineTo(hdc, 120, 210);
@@ -119,13 +133,13 @@ void PrintMyName(HDC hdc, int& _Num)
             MoveToEx(hdc, 35, 210, NULL); // ㅡ
             LineTo(hdc, 230, 210);
 
-            MyCircle(hdc, 120, 270, 7); // ㅇ
+            MyCircle(hdc, 120, 270, CirCleSize); // ㅇ
         }
     break;
     case 1:
         // 영
         {
-            MyCircle(hdc, 320, 120, 7);
+            MyCircle(hdc, 320, 120, CirCleSize);
 
             MoveToEx(hdc, 420, 60, NULL);
             LineTo(hdc, 420, 200);          // |
@@ -136,7 +150,7 @@ void PrintMyName(HDC hdc, int& _Num)
             MoveToEx(hdc, 390, 150, NULL); // -
             LineTo(hdc, 420, 150);
 
-            MyCircle(hdc, 370, 270, 7);
+            MyCircle(hdc, 370, 270, CirCleSize);
         }
     break;
     case 2:
@@ -148,7 +162,7 @@ void PrintMyName(HDC hdc, int& _Num)
             MoveToEx(hdc, 545, 60, NULL);
             LineTo(hdc, 710, 60);
 
-            MyCircle(hdc, 620, 130, 7); // ㅎ
+            MyCircle(hdc, 620, 130, CirCleSize); // ㅎ
 
             MoveToEx(hdc, 720, 60, NULL);
             LineTo(hdc, 720, 200);          // |
@@ -196,9 +210,85 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
         MoveToEx(hdc, 0, 400, NULL);
         LineTo(hdc, 800, 400);
 
+        // Unreal Engine
+        {
+            // U
+            MoveToEx(hdc, 50, 450, NULL);
+            LineTo(hdc, 50, 520);
+            MoveToEx(hdc, 100, 450, NULL);
+            LineTo(hdc, 100, 520);
+            MyDownHalfCircle(hdc, 75, 520, 25);
 
-        MyUpHalfCircle(hdc, 300, 300, 8);
-        //MyDownHalfCircle(hdc, 300, 300, 8);
+            // n
+            MoveToEx(hdc, 130, 500, NULL);
+            LineTo(hdc, 130, 550);
+            MoveToEx(hdc, 180, 500, NULL);
+            LineTo(hdc, 180, 550);
+            MyUpHalfCircle(hdc, 155, 500, 25);
+
+            // r
+            MoveToEx(hdc, 210, 500, NULL);
+            LineTo(hdc, 210, 550);
+            MyUpHalfCircle(hdc, 235, 525, 25);
+
+            // e
+            MoveToEx(hdc, 280, 525, NULL);
+            LineTo(hdc, 325, 525);
+            MyAngle(hdc, 300, 525, 25, 310);
+            
+            // a
+            MyUpHalfCircle(hdc, 360, 510, 25);
+            MyCircle(hdc, 360, 535, 25);
+            MoveToEx(hdc, 385, 510, NULL);
+            LineTo(hdc, 385, 555);
+            
+            // l
+            MoveToEx(hdc, 410, 450, NULL);
+            LineTo(hdc, 410, 555);
+
+            // E
+            MoveToEx(hdc, 320, 625, NULL);
+            LineTo(hdc, 365, 625);
+            MoveToEx(hdc, 320, 655, NULL);
+            LineTo(hdc, 365, 655);
+            MoveToEx(hdc, 320, 685, NULL);
+            LineTo(hdc, 365, 685);
+            MoveToEx(hdc, 320, 625, NULL);
+            LineTo(hdc, 320, 685);
+
+            // n
+            MoveToEx(hdc, 400, 655, NULL);
+            LineTo(hdc, 400, 680);
+            MoveToEx(hdc, 450, 655, NULL);
+            LineTo(hdc, 450, 680);
+            MyUpHalfCircle(hdc, 425, 660, 25);
+
+            // g
+            MyCircle(hdc, 500, 660, 25);
+            MoveToEx(hdc, 525, 650, NULL);
+            LineTo(hdc, 525, 700);
+            MyDownHalfCircle(hdc, 500, 700, 25);
+
+            // i
+            MyCircle(hdc, 550, 620, 5);
+            MoveToEx(hdc, 550, 640, NULL);
+            LineTo(hdc, 550, 690);
+
+            // n
+            MoveToEx(hdc, 580, 655, NULL);
+            LineTo(hdc, 580, 680);
+            MoveToEx(hdc, 630, 655, NULL);
+            LineTo(hdc, 630, 680);
+            MyUpHalfCircle(hdc, 605, 660, 25);
+            
+            //e
+            MoveToEx(hdc, 645, 655, NULL);
+            LineTo(hdc, 690, 655);
+            MyAngle(hdc, 665, 655, 25, 310);
+        }
+
+
+        //MyAngle(hdc, 200, 500, 50, 310);
 
 
         EndPaint(hWnd, &ps);
