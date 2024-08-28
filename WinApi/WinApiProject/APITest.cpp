@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <tchar.h>
 #include <cmath>
+#include <iostream>
 
 #define CirCleSize 50
 
@@ -272,10 +273,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     PAINTSTRUCT ps;
     
     static int Num = 0;
+    static int Dan = 2;
 
-    RECT rc = { 0 + (250 * Num), 0, (250 + (300 * Num)), 400 };
+    const int X = 150;
+    const int Y = 10;
 
-    
+    /*RECT rc = { 0 + (250 * Num), 0, (250 + (300 * Num)), 400 };*/
+
+    RECT rc2 = { X + 150 * (Dan % 3), Y + (240 * (Dan / 3)) ,
+        X + (300 * (Dan % 3) + (300 * (Dan / 3))), Y + 240 * ((Dan / 3) + 1)};
+
+
+    char Ch[256];
 
     switch (IMessage)
     {
@@ -285,31 +294,56 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     {
         hdc = BeginPaint(hWnd, &ps);
 
-        // 啊款单 急.
-        MoveToEx(hdc, 0, 400, NULL);
-        LineTo(hdc, 800, 400);
-        // Unreal Engine
+        //Unreal Engine
         {
-            PrintUnreal(hdc);
+            // 啊款单 急.
+            /*MoveToEx(hdc, 0, 400, NULL);
+            LineTo(hdc, 800, 400);
+            PrintUnreal(hdc);*/
         }
+
         EndPaint(hWnd, &ps);
     }
     break;
     case WM_LBUTTONDOWN:
         hdc = GetDC(hWnd);
 
-        PrintMyName(hdc, Num);
+        //PrintMyName(hdc, Num);
+
+        // 备备窜  
+        for (int i = 2; i <= Dan; i++)
+        {
+            for (int j = 1; j < 10; j++)
+            {
+                sprintf_s(Ch, "%d x %d = %d", i, j, i * j);
+                TextOut(hdc, X + ((i - 1) % 3 * 200),
+                    Y + (240 * ((i - 1) / 3) + (j - 1) * 25), Ch, static_cast<int>(strlen(Ch)));
+            }
+        }
+        Dan++;
+        if (Dan >= 9)
+        {
+            Dan = 9;
+        }
         
         ReleaseDC(hWnd, hdc);
         break;
     case WM_RBUTTONDOWN:
-
         --Num;
         if (Num <= 0)
         {
             Num = 0;
         }
-        InvalidateRect(hWnd, &rc , TRUE);
+
+        //InvalidateRect(hWnd, &rc , TRUE);
+
+        Dan--;
+        if (Dan <= 1)
+        {
+            Dan = 1;
+        }
+        InvalidateRect(hWnd, &rc2 , TRUE);
+
 
         break;
     case WM_KEYDOWN:
