@@ -118,7 +118,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     RegisterClass(&wndClass);
 
     // 1-3 화면에 보여줄 윈도우 창 생성.
-    _hwnd = CreateWindowW
+    _hwnd = CreateWindow
     (
         _lpszClass,                 // 윈도우 클래스 식별자
         _lpszClass,                 // 윈도우 타이틀 바 이름
@@ -150,6 +150,17 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     // ㄴ 다만 메세지 큐가 비어있을 경우 메세지가 들어올때까지 대기.
 
     // - PeekMessage : 메세지가 없더라도 반환이 된다. -> 게임에서 쓰인다.
+
+    //while (true)
+    //{
+    //    if (PeekMessage(&message, NULL, 0, 0, PM_REMOVE)) // ex) 차가 들어왔나, 안들어왔나 확인하는 도중 차가 확인안할때 들어오면 확인할수없기때문에,
+    //                                                        // 따라서 정밀한 시간의 Tick을 사용해서 업데이트하게 만들어야 확인할수있다.
+    //    {
+    //        if (message.message == WM_QUIT) break;
+    //        TranslateMessage(&message);
+    //        DispatchMessage(&message);
+    //    }
+    //}
 
     while (GetMessage(&message, 0, 0, 0))
     {
@@ -198,18 +209,138 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     나머지 메세지는 DefWindowProc 함수가 처리하도록 로직을 설계하는 것이 일반적.    
     */
 
+    //★★★★★
+    HDC hdc; // -> Handle Device Context ->GDI를 쓰기위한 객체 -> GDI는 Grapic Device Interface로 화면처리와 그래픽등 모든 출력장치를 제어한다.
+    // GDI는 BMP로 이루어져 있는데 장점으로 화소가 좋다. 단점으로 용량이 크다, A(알파, 투명도)의 부재.
+    // PNG는 보간이 이루어지는데, 두 색의 중간값을 찾아 보간한다.
+    // 보간이 안들어가면 회전이 괴롭힌다? -> 마우스에 따라 회전하며 움직이는 총(ex)엔터더건전)
+    // A가 생긴 GDI+가 있다.
+
+    PAINTSTRUCT ps;
+
+    char str[] = "오케이";
+    // ㄴ char[]
+    // ㄴ char*
+
+    // RECT -> 정적, *LPRECT -> 가변, 동적
+    // 사각형의 좌표를 저장하기 위한 자료형.
+    // ㄴ 시작점 SX, SY (L, T) / 끝점 EX, EY (R, B)가 존재한다.
+    RECT rc = { 100, 100, 200, 200 };
+    /*
+     도형 : 삼,   사,    원,    다.
+     ->   애매,  좋음,  죄악,  애매
+        (정밀도)       필요악 (너무)
+
+     -> 삼각형과 다각형은 폴리곤으로 그릴순있다.
+
+    */
+
     switch (IMessage)
     {
     case WM_CREATE: // 생성자
+
         break;
-    //case WM_PAINT: // 그리는기능
-    //{
-    //    PAINTSTRUCT ps;
-    //    HDC hdc = BeginPaint(hWnd, &ps);
-    //    // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-    //    EndPaint(hWnd, &ps);
-    //}
-    //break;
+
+    /*
+    WM_pAINT
+        
+    - 윈도우를 다시 그려야 할 때 발생하는 메세지
+
+    ㄴ 윈도우가 처음 만들어 졌을때 발생한다.
+    ㄴ 윈도우 크기를 조절할때
+    ㄴ 윈도우가 다른 윈도우에 가려졌다가 다시 보일때
+    ㄴ 관련 함수가 호출될 때.        
+    */
+    // 출력에 관한 모든 것을 담당한다. (문자, 그림, 도형등등 화면에 보이는 모든 것)
+    case WM_PAINT: // 그리는기능
+    {
+        hdc = BeginPaint(hWnd, &ps);
+
+        SetPixel(hdc, 300, 200, RGB(255, 0, 0));
+
+        for (int i = 0; i < 10000; i++)
+        {
+            SetPixel(hdc, rand() % 800, rand() % 800, RGB(rand()%255, rand() % 255, rand() % 255,));
+        }
+
+        for (int i = 0; i < 100; i++)
+        {
+            for (int j = 0; j < 100; j++)
+            {
+                SetPixel(hdc, 400 + i, 300 + j, RGB(255, i * 2, j * 2));
+            }
+        }
+
+        // 원 그리기
+        Ellipse(hdc, 300, 100, 200, 200);
+
+        // 사각형 그리기
+        Rectangle(hdc, 100, 100, 200, 200);        
+        Rectangle(hdc, rc.left, rc.top, rc.right, rc.bottom);
+        
+        // TODO: 여기에 hdc를 사용하는  그리기 코드를 추가합니다...
+        /*
+        문자셋
+        (멀티바이트)    (유니코드World Wide)    (컴퓨터한테 맡기는것)
+        strlen(x, y) -> wcslen -> _tcslen 
+        strcpy(x, y) -> wcscpy -> _tcscpy
+        strcmp(x, y) -> ....
+        strcat(x, y) -> ....
+        +
+        strtok(x) 문자열 자르기 -> ....
+
+        strchar 문자 찾기 -> ....
+        strstr 문자열 찾기 -> ....
+
+        strlen()
+        strnlen()
+        strlen_s()
+        */
+
+        // 문자열 / 문자열 길이
+        // ㄴ strlen() 할당 받은 메모리에 바인딩 된 문자열에서 NULL 값을 제외한 문자열 길이.
+        TextOut(hdc, 300, 300, "과제가 너무 재밌다^^", strlen("과제가 너무 재밌다^^"));
+
+        SetTextColor(hdc, RGB(255, 0, 0));
+        TextOut(hdc, 300, 400, "더 많은 과제가 필요하다.", strlen("더 많은 과제가 필요하다."));
+
+        MoveToEx(hdc, 400, 400, NULL);
+        LineTo(hdc, 200, 400);
+        /*
+        WINGDIAPI BOOL  WINAPI TextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _In_reads_(c) LPCSTR lpString, _In_ int c);
+        // _In_reads_ 는 읽기만하고, 포인터는 받지 않는다.
+        // _outpu_reads는 무조건 읽기만. 읽기전용.
+        */
+
+        MoveToEx(hdc, 400, 400, NULL);
+        LineTo(hdc, 200, 200);
+
+        EndPaint(hWnd, &ps);
+    }
+    break;
+    case WM_LBUTTONDOWN:
+        hdc = GetDC(hWnd);
+
+        SetTextColor(hdc, RGB(0, 0, 255));
+
+        TextOut(hdc, 350, 500, str, strlen(str));
+        ReleaseDC(hWnd, hdc);
+        break;
+    case WM_RBUTTONDOWN:
+
+        break;
+    case WM_KEYDOWN:
+        switch (wParam)
+        {
+        case VK_LEFT:
+            break;
+        case VK_RIGHT:
+            break;
+        case VK_ESCAPE:
+            PostMessage(hWnd, WM_DESTROY, 0, 0);
+            break;
+        }
+        break;
     case WM_DESTROY:
         // PostQuitMessage : 이 함수는 메세지 큐에 QUIT 메세지를 보내는 역할을 수행.
         // Quit 메세지를 수신하는 순간 GetMessage가 FALSE를 반환하므로 메세지 루프는 종료된다.
