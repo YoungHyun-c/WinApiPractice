@@ -3,13 +3,13 @@
 
 HWND _hWnd;
 HINSTANCE _hInstance;
-LPTSTR _lpszClass = TEXT("WINAPI CLASS");
+LPTSTR _lpszClass = TEXT("WINAPI CLASSS");
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
-
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreveInstance, LPSTR lpszCmdParam, int nCmdShow)
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hpreveInstance, LPSTR _lpszCmdParam, int nCmdShow)
 {
+
 	_hInstance = hInstance;
 
 	WNDCLASS wndClass;
@@ -17,13 +17,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreveInstance, LPSTR lpszCm
 	wndClass.cbWndExtra = 0;
 	wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	wndClass.hCursor = LoadCursor(_hInstance, IDC_ARROW);
-	wndClass.hIcon = LoadIcon(_hInstance, IDI_APPLICATION);
+	wndClass.hIcon = LoadCursor(_hInstance, IDI_APPLICATION);
 	wndClass.hInstance = _hInstance;
 	wndClass.lpszClassName = _lpszClass;
 	wndClass.lpszMenuName = NULL;
 	wndClass.lpfnWndProc = (WNDPROC)WndProc;
 	wndClass.style = CS_HREDRAW | CS_VREDRAW;
-
 
 	RegisterClass(&wndClass);
 
@@ -44,9 +43,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreveInstance, LPSTR lpszCm
 
 	ShowWindow(_hWnd, nCmdShow);
 
-
 	MSG Message;
-
 	while (GetMessage(&Message, 0, 0, 0))
 	{
 		TranslateMessage(&Message);
@@ -55,7 +52,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreveInstance, LPSTR lpszCm
 
 	return (int)Message.wParam;
 }
-
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
 {
