@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include <tchar.h>
-#include <cmath>
 #include <iostream>
+#include <cmath>
 #include <math.h>
 #include "CommonMacroFunction.cpp"
 
@@ -73,136 +73,125 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     return (int)message.wParam;
 }
 
-void MyCircle(HDC _hdc, int _X, int _Y, int _R)
+struct Color
 {
-    int R = _R;
-    for (int i = 0; i < 361; i++)
-    {
-        MoveToEx(_hdc, _X + static_cast<int>(cos(i) * R), _Y + static_cast<int>(sin(i) * R), NULL);
-        LineTo(_hdc, _X + 1 + static_cast<int>(cos(i) * R), _Y + 1 + static_cast<int>(sin(i) * R));
-    }
-}
+    static const int WHITE;
+    static const int BLUE;
+    static const int GREEN;
+    static const int RED;
+    static const int YELLOW;
+    static const int ORANGE;
+    static const int PURPLE;
+};
 
-void MyUpHalfCircle(HDC _hdc, int _X, int _Y, int _R)
+const int Color::WHITE = 0xFFFFFF;
+const int Color::BLUE = 0xFF0000;
+const int Color::GREEN = 0x00FF00;
+const int Color::RED = 0x0000FF;
+const int Color::YELLOW = 0x33CCFF;
+const int Color::ORANGE = 0x3399FF;
+const int Color::PURPLE = 0x9900CC;
+
+#define White_Color int3(255,255,255)
+
+void PrintWhiteCustomCircle(HDC hdc, float _X, float _Y, float _R, float _Rate = 40.0f)
 {
-    int R = _R;
-    for (int i = 0; i < 361; i++)
-    {
-        MoveToEx(_hdc, _X + static_cast<int>(cos(i) * R), _Y - abs(static_cast<int>(sin(i) * R)), NULL);
-        LineTo(_hdc, _X + 1 + static_cast<int>(cos(i) * R), _Y + 1 - abs(static_cast<int>(sin(i) * R)));
-    }
-}
-
-void MyDownHalfCircle(HDC _hdc, int _X, int _Y, int _R)
-{
-    int R = _R;
-    for (int i = 0; i < 361; i++)
-    {
-        MoveToEx(_hdc, _X + static_cast<int>(cos(i) * R), _Y + abs(static_cast<int>(sin(i) * R)), NULL);
-        LineTo(_hdc, _X + 1 + static_cast<int>(cos(i) * R), _Y + 1 + abs(static_cast<int>(sin(i) * R)));
-    }
-}
-
-void MyAngle(HDC _hdc, int _X, int _Y, int _R, int _Angle)
-{
-    double PI = 3.14;
-    for (float i = 0; i < _Angle; i++)
-    {
-        double radian = i * (PI / 180.0);
-        int x = _X + static_cast<int>(_R * cos(radian));
-        int y = _Y - static_cast<int>(_R * sin(radian));
-        MoveToEx(_hdc, x, y, NULL);
-        LineTo(_hdc, x + 1, y + 1);
-    }
-}
-
-
-typedef struct { float x, y; } Point2D;
-
-//Point2D PointOnCubicBezier(HDC hdc, Point2D* cp, float t)
-//{
-//    float ax, bx, cx, ay, by, cy, tSquared, tCubed;
-//    Point2D result;
-//
-//    // 다항식 계수를 계산한다.
-//    cx = 3.0 * (cp[1].x - cp[0].x);
-//    bx = 3.0 * (cp[2].x - cp[1].x) - cx;
-//    ax = cp[3].x - cp[0].x - cx - bx;
-//
-//    cy = 3.0 * (cp[1].y - cp[0].y);
-//    by = 3.0 * (cp[2].y - cp[1].y) - cy;
-//    ay = cp[3].y - cp[0].y - cy - by;
-//
-//    tSquared = t * t;
-//    tCubed = tSquared * t;
-//
-//    result.x = (ax * tCubed) + (bx * tSquared) + (cx * t) + cp[0].x;
-//    result.y = (ay * tCubed) + (bx * tSquared) + (cy * t) + cp[0].y;
-//
-//    MoveToEx(hdc, result.x, result.y, NULL);
-//    LineTo(hdc, result.x + 2, result.y + 2);
-//    return result;
-//}
-//
-//void Computerbezier(HDC hdc, Point2D* cp, int NumberOfPoints, Point2D* Curve)
-//{
-//    float dt;
-//    int i;
-//
-//    dt = 1.0 / (NumberOfPoints - 1);
-//
-//    for (i = 0; i < NumberOfPoints; i++)
-//        Curve[i] = PointOnCubicBezier(hdc, cp, i * dt);
-//}
-
-Point2D* Pos1 = new Point2D({ 300, 300 });
-Point2D* Pos2 = new Point2D({ 400, 400 });
-
-void PrintCircle(HDC hdc, float _X, float _Y, float _R, float _Rate = 40.0f)
-{
-    float Rpow = pow(_R, 2);
+    float Rpow = static_cast<float>(pow(_R, 2));
 
     for (float X = _X - _R; X < _X + _R; X++)
     {
         for (float Y = _Y - _R; Y < _Y + _R; Y++)
         {
-            float Xpow = (_X - X) * (_X - X);
+            float Xpow = ((_X - X) * (_X - X)) / 2;
             float Ypow = (_Y - Y) * (_Y - Y);
-            if (Xpow + Ypow - Rpow < _Rate && Xpow + Ypow - Rpow >= -(_Rate * _Rate))
-            {
-                SetPixel(hdc, X, Y, RGB(255, 0, 0));
-            }
-        }
-    }
-}
 
-void PrintStarCircle(HDC hdc, float _X, float _Y, float _R, float _Rate = 40.0f)
-{
-    float Rpow = pow(_R, 2);
-
-    for (float X = _X - _R; X < _X + _R; X++)
-    {
-        for (float Y = _Y - _R; Y < _Y + _R; Y++)
-        {
-            float Xpow = (_X - X) * (_X - X);
-            float Ypow = (_Y - Y) * (_Y - Y);
-            /*if (Xpow + Ypow - Rpow < _Rate && Xpow + Ypow - Rpow >= -(_Rate * _Rate))
-            {
-                SetPixel(hdc, X, Y, RGB(255, 0, 0));
-            }*/
             if (Xpow + Ypow <= Rpow)
             {
-                SetPixel(hdc, X, Y, RGB(255, 0, 0));
-            }
-            if (Y <= 400 && Y > 300 && Xpow + Ypow <= Rpow)
-            {
-                SetPixel(hdc, X, Y, RGB(0, 255, 0));
+                SetPixel(hdc, static_cast<int>(X), static_cast<int>(Y), Color::WHITE);
             }
         }
     }
 }
 
+void PrintWhiteCircle(HDC hdc, float _X, float _Y, float _R, float _Rate = 40.0f)
+{
+    float Rpow = static_cast<float>(pow(_R, 2));
 
+    for (float X = _X - _R; X < _X + _R; X++)
+    {
+        for (float Y = _Y - _R; Y < _Y + _R; Y++)
+        {
+            float Xpow = ((_X - X) * (_X - X));
+            float Ypow = (_Y - Y) * (_Y - Y);
+
+            if (Xpow + Ypow <= Rpow)
+            {
+                SetPixel(hdc, static_cast<int>(X), static_cast<int>(Y), Color::WHITE);
+            }
+        }
+    }
+}
+
+#define LeafCircle 75
+bool CollisionCheck(float _X, float _Y, float _OtherX, float _OtherY)
+{
+    double distance = sqrt(pow(_OtherX - _X, 2) + pow(_OtherY - _Y, 2));
+    return distance < (LeafCircle + LeafCircle);
+}
+
+void PrintCircle(HDC hdc, float _X, float _Y, float _R, float _Rate = 40.0f, int _Color = 0xFFFFFF)
+{
+    float Rpow = static_cast<float>(pow(_R, 2));
+    for (float X = _X - _R; X < _X + _R; X++)
+    {
+        for (float Y = _Y - _R; Y < _Y + _R; Y++)
+        {
+            float Xpow = (_X - X) * (_X - X);
+            float Ypow = (_Y - Y) * (_Y - Y);
+            if (Y <= 267 && Xpow + Ypow <= Rpow)
+            {
+                SetPixel(hdc, static_cast<int>(X), static_cast<int>(Y), Color::GREEN);
+            }
+            else if (Y <= 334 && Xpow + Ypow <= Rpow)
+            {
+                SetPixel(hdc, static_cast<int>(X), static_cast<int>(Y), Color::YELLOW);
+            }
+            else if (Y <= 401 && Xpow + Ypow <= Rpow)
+            {
+                SetPixel(hdc, static_cast<int>(X), static_cast<int>(Y), Color::ORANGE);
+            }
+            else if (Y <= 468 && Xpow + Ypow <= Rpow)
+            {
+                SetPixel(hdc, static_cast<int>(X), static_cast<int>(Y), Color::RED);
+            }
+            else if (Y <= 525 && Xpow + Ypow <= Rpow)
+            {
+                SetPixel(hdc, static_cast<int>(X), static_cast<int>(Y), Color::PURPLE);
+            }
+            else if(Xpow + Ypow <= Rpow)
+            {
+                SetPixel(hdc, static_cast<int>(X), static_cast<int>(Y), _Color);
+            }
+        }
+    }
+}
+
+void PrintLeaf(HDC hdc, float _X, float _Y, float _OtherX, float _OtherY, float _R, float _Rate = 40.0f, int _Color = 0xFFFFFF)
+{
+    float Rpow = static_cast<float>(pow(_R, 2));
+    for (float X = _X - _R; X < _X + _R; X++)
+    {
+        for (float Y = _Y - _R; Y < _Y + _R; Y++)
+        {
+            float Xpow = (_X - X) * (_X - X);
+            float Ypow = (_Y - Y) * (_Y - Y);
+            if (Xpow + Ypow <= Rpow && CollisionCheck(X, Y, _OtherX, _OtherY))
+            {
+                SetPixel(hdc, static_cast<int>(X), static_cast<int>(Y), _Color);
+            }
+        }
+    }
+}
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
 {
@@ -215,9 +204,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     const int X = 150;
     const int Y = 10;
 
-    char Ch[256];
     RECT rc = { 0 + (250 * Num), 0, (250 + (300 * Num)), 400 };
 
+ 
 
     switch (IMessage)
     {
@@ -227,10 +216,34 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     {
         hdc = BeginPaint(hWnd, &ps);
 
+        // x 선.
+        for (int i = 0; i < 9; i++)
+        {
+            MoveToEx(hdc, 0, 100 * i, NULL);
+            LineTo(hdc, 800, 100 * i);
 
-        PrintStarCircle(hdc, 400.0f, 400.0f, 100.0f, 80);
+            MoveToEx(hdc, 100 * i, 0, NULL);
+            LineTo(hdc, 100 * i, 800);
+        }
+
+        PrintCircle(hdc, 400.0f, 400.0f, 200, 40, Color::BLUE);
+        PrintWhiteCustomCircle(hdc, 400.0f, 640.0f, 80.0f);
+        PrintWhiteCustomCircle(hdc, 400.0f, 140.0f, 80.0f);
+
+        PrintCircle(hdc, 300.0f, 300.0f, 100.0f, 40.0f, Color::BLUE);
+        PrintCircle(hdc, 320.0f, 350.0f, 140.0f, 40.0f, Color::BLUE);
+        PrintCircle(hdc, 300.0f, 400.0f, 110.0f, 40.0f, Color::BLUE);
+
+        PrintCircle(hdc, 500.0f, 300.0f, 100.0f, 40.0f, Color::BLUE);
+
+        PrintCircle(hdc, 335.0f, 535.0f, 50.0f, 40.0f, Color::BLUE);
+        PrintCircle(hdc, 465.0f, 535.0f, 50.0f, 40.0f, Color::BLUE);
 
 
+        PrintLeaf(hdc, 380.0f, 50.0f, 530.0f, 200.0f, 150.0f, 40.0f, Color::GREEN);
+
+
+        PrintWhiteCircle(hdc, 600.0f, 370.0f, 100.0f);
         EndPaint(hWnd, &ps);
     }
     break;
