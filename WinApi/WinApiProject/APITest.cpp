@@ -265,7 +265,53 @@ void PrintUnreal(HDC hdc)
     MoveToEx(hdc, 645, 655, NULL);
     LineTo(hdc, 690, 655);
     MyAngle(hdc, 665, 655, 25, 310);
+
+
+    MoveToEx(hdc, 645, 655, NULL);
+    LineTo(hdc, 646, 656);
 }
+
+typedef struct {float x, y;} Point2D;
+
+Point2D PointOnCubicBezier(HDC hdc, Point2D* cp, float t)
+{
+    float ax, bx, cx, ay, by, cy, tSquared, tCubed;
+    Point2D result;
+
+    // 다항식 계수를 계산한다.
+    cx = 3.0 * (cp[1].x - cp[0].x);
+    bx = 3.0 * (cp[2].x - cp[1].x) - cx;
+    ax = cp[3].x - cp[0].x - cx - bx;
+
+    cy = 3.0 * (cp[1].y - cp[0].y);
+    by = 3.0 * (cp[2].y - cp[1].y) - cy;
+    ay = cp[3].y - cp[0].y - cy - by;
+
+    tSquared = t * t;       
+    tCubed = tSquared * t;
+
+    result.x = (ax * tCubed) + (bx * tSquared) + (cx * t) + cp[0].x;
+    result.y = (ay * tCubed) + (bx * tSquared) + (cy * t) + cp[0].y;
+
+    MoveToEx(hdc, result.x, result.y, NULL);
+    LineTo(hdc, result.x + 2, result.y + 2);
+    return result;
+}
+
+void Computerbezier(HDC hdc, Point2D* cp, int NumberOfPoints, Point2D* Curve)
+{
+    float dt;
+    int i;
+
+    dt = 1.0 / (NumberOfPoints - 1);
+
+    for (i = 0; i < NumberOfPoints; i++)
+        Curve[i] = PointOnCubicBezier(hdc, cp, i * dt);
+
+}
+
+Point2D* Pos1 = new Point2D({ 300, 300 });
+Point2D* Pos2 = new Point2D({ 400, 400 });
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
 {
@@ -278,13 +324,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     const int X = 150;
     const int Y = 10;
 
-    /*RECT rc = { 0 + (250 * Num), 0, (250 + (300 * Num)), 400 };*/
-
-    RECT rc2 = { X + 150 * (Dan % 3), Y + (240 * (Dan / 3)) ,
-        X + (300 * (Dan % 3) + (300 * (Dan / 3))), Y + 240 * ((Dan / 3) + 1)};
-
-
     char Ch[256];
+    RECT rc = { 0 + (250 * Num), 0, (250 + (300 * Num)), 400 };
+
+   /* RECT rc2 = { X + 150 * (Dan % 3), Y + (240 * (Dan / 3)) ,
+        X + (300 * (Dan % 3) + (300 * (Dan / 3))), Y + 240 * ((Dan / 3) + 1)};*/
+
+    
+
 
     switch (IMessage)
     {
@@ -302,6 +349,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
             PrintUnreal(hdc);*/
         }
 
+        Computerbezier(hdc, Pos1, 70, Pos2);
+
         EndPaint(hWnd, &ps);
     }
     break;
@@ -311,7 +360,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
         //PrintMyName(hdc, Num);
 
         // 구구단  
-        for (int i = 2; i <= Dan; i++)
+       /* for (int i = 2; i <= Dan; i++)
         {
             for (int j = 1; j < 10; j++)
             {
@@ -324,7 +373,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
         if (Dan >= 9)
         {
             Dan = 9;
-        }
+        }*/
         
         ReleaseDC(hWnd, hdc);
         break;
@@ -335,14 +384,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
             Num = 0;
         }
 
-        //InvalidateRect(hWnd, &rc , TRUE);
+        InvalidateRect(hWnd, &rc , TRUE);
 
-        Dan--;
+       /* Dan--;
         if (Dan <= 1)
         {
             Dan = 1;
         }
-        InvalidateRect(hWnd, &rc2 , TRUE);
+        InvalidateRect(hWnd, &rc2 , TRUE);*/
 
 
         break;

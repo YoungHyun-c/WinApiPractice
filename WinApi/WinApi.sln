@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyTest", "MyTest\MyTest.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinApiProject", "WinApiProject\WinApiProject.vcxproj", "{CF7D3E54-1C8B-49FC-B8DC-763761FB6470}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project1", "Project1\Project1.vcxproj", "{BD527C70-228E-49E5-B4CF-FC0124B8D728}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{CF7D3E54-1C8B-49FC-B8DC-763761FB6470}.Release|x64.Build.0 = Release|x64
 		{CF7D3E54-1C8B-49FC-B8DC-763761FB6470}.Release|x86.ActiveCfg = Release|Win32
 		{CF7D3E54-1C8B-49FC-B8DC-763761FB6470}.Release|x86.Build.0 = Release|Win32
+		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Debug|x64.ActiveCfg = Debug|x64
+		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Debug|x64.Build.0 = Debug|x64
+		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Debug|x86.ActiveCfg = Debug|Win32
+		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Debug|x86.Build.0 = Debug|Win32
+		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Release|x64.ActiveCfg = Release|x64
+		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Release|x64.Build.0 = Release|x64
+		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Release|x86.ActiveCfg = Release|Win32
+		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

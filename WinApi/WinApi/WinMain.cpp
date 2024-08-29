@@ -31,8 +31,7 @@ EX)
 */
 #pragma endregion  
 
-#include <Windows.h>
-#include <tchar.h>
+#include "stdafx.h"
 
 // 전역 변수
 /*
@@ -196,6 +195,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 // IMessage : 메세지 구분 번호
 // wParam : unsigned int 마우스 버튼의 상태 / 키보드 조합 키의 상태를 전달한다.
 // lParam : unsigned long 마우스 클릭 좌표를 전달
+RECT rc;
 LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
 {
     /*
@@ -225,7 +225,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     // RECT -> 정적, *LPRECT -> 가변, 동적
     // 사각형의 좌표를 저장하기 위한 자료형.
     // ㄴ 시작점 SX, SY (L, T) / 끝점 EX, EY (R, B)가 존재한다.
-    RECT rc = { 100, 100, 200, 200 };
+    //RECT rc = { 100, 100, 200, 200 };
     /*
      도형 : 삼,   사,    원,    다.
      ->   애매,  좋음,  죄악,  애매
@@ -238,7 +238,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     switch (IMessage)
     {
     case WM_CREATE: // 생성자
-
+        rc = RectMakeCenter(400, 400, 100, 100);
         break;
 
     /*
@@ -256,7 +256,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     {
         hdc = BeginPaint(hWnd, &ps);
 
-        SetPixel(hdc, 300, 200, RGB(255, 0, 0));
+        /*SetPixel(hdc, 300, 200, RGB(255, 0, 0));
 
         for (int i = 0; i < 10000; i++)
         {
@@ -269,15 +269,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
             {
                 SetPixel(hdc, 400 + i, 300 + j, RGB(255, i * 2, j * 2));
             }
-        }
+        }*/
 
         // 원 그리기
-        Ellipse(hdc, 300, 100, 200, 200);
+        //Ellipse(hdc, 300, 100, 200, 200);
 
         // 사각형 그리기
-        Rectangle(hdc, 100, 100, 200, 200);        
+        //Rectangle(hdc, 100, 100, 200, 200);        
         Rectangle(hdc, rc.left, rc.top, rc.right, rc.bottom);
-        
+
+        DrawRectMake(hdc, rc);
+
         // TODO: 여기에 hdc를 사용하는  그리기 코드를 추가합니다...
         /*
         문자셋
@@ -299,21 +301,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
 
         // 문자열 / 문자열 길이
         // ㄴ strlen() 할당 받은 메모리에 바인딩 된 문자열에서 NULL 값을 제외한 문자열 길이.
-        TextOut(hdc, 300, 300, "과제가 너무 재밌다^^", strlen("과제가 너무 재밌다^^"));
+        //TextOut(hdc, 300, 300, "과제가 너무 재밌다^^", strlen("과제가 너무 재밌다^^"));
 
-        SetTextColor(hdc, RGB(255, 0, 0));
-        TextOut(hdc, 300, 400, "더 많은 과제가 필요하다.", strlen("더 많은 과제가 필요하다."));
+        //SetTextColor(hdc, RGB(255, 0, 0));
+        //TextOut(hdc, 300, 400, "더 많은 과제가 필요하다.", strlen("더 많은 과제가 필요하다."));
 
-        MoveToEx(hdc, 400, 400, NULL);
-        LineTo(hdc, 200, 400);
-        /*
-        WINGDIAPI BOOL  WINAPI TextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _In_reads_(c) LPCSTR lpString, _In_ int c);
-        // _In_reads_ 는 읽기만하고, 포인터는 받지 않는다.
-        // _outpu_reads는 무조건 읽기만. 읽기전용.
-        */
+        //MoveToEx(hdc, 400, 400, NULL);
+        //LineTo(hdc, 200, 400);
+        ///*
+        //WINGDIAPI BOOL  WINAPI TextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _In_reads_(c) LPCSTR lpString, _In_ int c);
+        //// _In_reads_ 는 읽기만하고, 포인터는 받지 않는다.
+        //// _outpu_reads는 무조건 읽기만. 읽기전용.
+        //*/
 
-        MoveToEx(hdc, 400, 400, NULL);
-        LineTo(hdc, 200, 200);
+        //MoveToEx(hdc, 400, 400, NULL);
+        //LineTo(hdc, 200, 200);
 
         EndPaint(hWnd, &ps);
     }
@@ -416,5 +418,43 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
  -> SetTimer
  -> KillTimer
  -> InvaildateRect -> 1, 2번 과제에 필요할것.
+
+*/
+
+// 8 / 29
+/*
+과제 1.
+ 오망성 출력
+ -> 오망성을 마번진처럼 출력
+
+ -> 양식 및 사용 문법은 본인 자유지만 삼각 함수 X
+
+ 과제 2.
+ 사각형 2개 움직이기
+ -> 총 사각형 갯수 : 2개
+ -> 하나는 움직일 수 있는 사각형 / 다른 하나는 움직일 수 없는 사각형.
+ -> 움직일 수 없는 사각형을 움직일 수 있는 사각형이 밀어낼 수 있으면 된다.
+
+ 예외처리
+ ㄴ 1. 2개의 사각형은 화면밖으로 나갈 수 없다.
+ ㄴ 2. 2개의 사각형을 초기 위치로 돌리는 기능도 추가한다.
+
+ ※ 별다른 언급을 하기 전에는 충돌 함수를 사용하지 말것.
+
+ 다음주 월요일
+ 과제 3.
+ 사각형 영혼 밀어 넣기.
+
+ -> 시작은 큰 사각형 2개와 작은 사각형 1개
+ -> 내가 움직일 수 있는 사각형 안에는 작은 사각형이 있다.
+ -> 사각형을 움직이면 작은 사각형 역시 움직이거나 / 큰 사각형에 끌려 가야 한다.
+ ㄴ 끌려가는 것을 추천.
+
+ -> 예외처리 : 작은 사각형은 큰 사각형을 벗어날 수 없다.
+
+ -> 큰 사각형끼리 충돌이 되면 작은 사각형은 충돌이 된 반대편 사각형으로 이동한다.
+ ※ 이때 움직일 수 있는 주도권은 작은 사각형을 소유하고 있는 큰 사각형
+ ※ 모서리에 대한 예외처리 수행할 것. -> 작은 사각형과 큰사각형만 고려했을땐 모서리끼리 부딪혔을때 안될 수 있음.
+
 
 */

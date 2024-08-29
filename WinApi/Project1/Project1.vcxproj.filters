@@ -15,31 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WinMain.cpp">
+    <ClCompile Include="8_29.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="C3DMatrix.cpp">
+    <ClCompile Include="CommonMacroFunction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="C3Dvector.cpp">
+    <ClCompile Include="Apple.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="C3DMatrix.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="C3Dvector.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CommonMacroFunction.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
