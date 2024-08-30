@@ -13,12 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\SIngleton">
+      <UniqueIdentifier>{681b7ca3-acec-4df8-8e78-8d2a3b4a3541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Utillity">
+      <UniqueIdentifier>{2c49c58b-303d-4ab7-8eee-7f0f1c582cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Utillity\Math">
+      <UniqueIdentifier>{6c716f2c-42b4-4cdc-8a3c-ee14744239f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="8_29.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CommonMacroFunction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Apple.cpp">
@@ -27,5 +33,16 @@
     <ClCompile Include="Rect2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CommonMacroFunction.h">
+      <Filter>소스 파일\Utillity\Math</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RandomFunction.h">
+      <Filter>소스 파일\Utillity\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>소스 파일\SIngleton</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

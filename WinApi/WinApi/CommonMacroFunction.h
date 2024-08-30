@@ -1,6 +1,12 @@
 #pragma once
 // CommonMacroFunction
 
+//template <typename InterfaceType> 여기에 있어야되는게 마즘
+//inline void SafeDelete(InterfaceType** currentObject, InterfaceType* new Object)
+//{
+//
+//}
+
 inline POINT PointMake(int x, int y)
 {
 	POINT pt = { x, y };

@@ -59,4 +59,32 @@ ID2D1Factory* _ID2DFactory = nullptr;
 ID2D1HwndRenderTarget* _ID2DRenderTarget = nullptr;
 */
 
+// Stdafx (Standard Application FrameWorks)
+// ㄴ VS를 이용하여 프로젝트를 생성하면 생성되는 클래스 약어 -> MS
+// ㄴ 표준 어플리케이션 프레임워크 툴
+
+// # 내가 만든 헤더 파일 #
 #include "CommonMacroFunction.h"
+#include "RandomFunction.h"
+
+// # 디자인 패턴 #
+#define RND RandomFunction::getSingleton() // 왠만하면, 매크로가 아닌 것은 풀네임으로, 대문자로 써야된다. 언더바없이.
+
+// # 매크로 #
+#define WINNAME			(LPSTR)(TEXT("WindowsAPI"))
+#define WINSTART_X		400
+#define WINSTART_Y		400
+#define WINSIZE_X		800
+#define WINSIZE_Y		800
+#define WINSTYLE		WS_CAPTION | WS_SYSMENU // 타이틀바, 오른쪽 메뉴
+
+// # 매크로 함수 #
+#define SAFE_DELETE(p)			{if(p) {delete (p); (p) = nullptr;}}
+#define SAFE_DELETE_ARRAY(p)	{if(p) {delte[] (p); (p) = nullptr;}}
+#define SAFE_RELEASE(p)			{if(p) {(p)->release(); (p) = nullptr}}
+
+// # 전역 변수 #
+// extern -> 명시 키워드 함수의 선언 부분과 비슷하다. 선언 되어있으니 오류처리하지말구 넘어가라.
+extern HINSTANCE	_hInstance;
+extern HWND			_hWnd;
+extern POINT		_ptMouse;

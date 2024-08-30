@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <math.h>
-#include "CommonMacroFunction.cpp"
+#include "CommonMacroFunction.h"
 
 #define CirCleSize 50
 

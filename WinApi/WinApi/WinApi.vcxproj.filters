@@ -1,45 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="APIFrameWork">
+      <UniqueIdentifier>{c193f40d-bf9c-4bb4-9033-5eaf4b5aa0a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="APIFrameWork\PCH">
+      <UniqueIdentifier>{ab4ce389-1c60-4a46-8b38-6bc8c5d9e2ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="APIFrameWork\WinMain">
+      <UniqueIdentifier>{560f8f33-bd93-445a-8bd9-c396b8b06b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\DesignPattern">
+      <UniqueIdentifier>{e4c1a759-d7e6-474f-9a6c-9e868083c768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\Utility">
+      <UniqueIdentifier>{19101c47-729d-4010-9c89-eca31863d2dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\Utility\Math">
+      <UniqueIdentifier>{a8228765-82e5-4bfd-9897-3e7f1cb05bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\DesignPattern\Singleton">
+      <UniqueIdentifier>{01e4921f-bc5d-4ec2-bbb4-c76a01b69d97}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>APIFrameWork\PCH</Filter>
+    </ClCompile>
     <ClCompile Include="WinMain.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>APIFrameWork\WinMain</Filter>
     </ClCompile>
     <ClCompile Include="C3DMatrix.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>APIFrameWork\Utility\Math</Filter>
     </ClCompile>
     <ClCompile Include="C3Dvector.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>APIFrameWork\Utility\Math</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="WinMainStudy.cpp">
+      <Filter>APIFrameWork\WinMain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C3DMatrix.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="stdafx.h">
+      <Filter>APIFrameWork\PCH</Filter>
     </ClInclude>
     <ClInclude Include="C3Dvector.h">
-      <Filter>소스 파일</Filter>
+      <Filter>APIFrameWork\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C3DMatrix.h">
+      <Filter>APIFrameWork\Utility\Math</Filter>
     </ClInclude>
     <ClInclude Include="CommonMacroFunction.h">
-      <Filter>소스 파일</Filter>
+      <Filter>APIFrameWork\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>APIFrameWork\DesignPattern\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomFunction.h">
+      <Filter>APIFrameWork\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
