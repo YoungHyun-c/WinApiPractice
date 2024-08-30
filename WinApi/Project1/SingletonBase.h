@@ -1,39 +1,35 @@
-#pragma once
+#pragma
 
 template <class T>
-class SingleTon
+class SingleTonBase
 {
 protected:
-	static T* singleton;
-
-	SingleTon() {}
-	~SingleTon() {}
+	static T* SingleTon;
 
 public:
-	static T* getSingleton(void);
-	void releaseSingleton(void);
-
+	static T* GetSingleTon(void);
+	void releaseSingleTon(void);
 };
 
 template <typename T>
-T* SingleTon<T>::singleton = 0;
+T* SingleTonBase<T>::SingleTon = 0;
 
-template <typename T>
-T* SingleTon<T>::getSingleton(void)
+template<typename T>
+T* SingleTonBase<T>::GetSingleTon(void)
 {
-	if (!singleton)
+	if (!SingleTon)
 	{
-		singleton = new T;
+		SingleTon = new T;
 	}
-	return singleton;
+	return SingleTon;
 }
 
 template <typename T>
-void SingleTon<T>::releaseSingleton(void)
+void relaseSingleTon(void)
 {
-	if (singleton)
+	if (SingleTon)
 	{
-		delete singleton;
-		singleton = 0;
+		delete SingleTon;
+		SingleTon = 0;
 	}
 }

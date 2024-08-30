@@ -7,7 +7,7 @@
 #include <SDKDDKVer.h>
 
 // 거의 사용되지 않는 내용을 Windows 헤더에서 제외 합니다. (비활성화)
-#define WIN32_LeAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
 // #undef // 매크로 지정 해제.
 //#include <ole.h> -> 회전 헤더.
 //#else
@@ -81,7 +81,7 @@ ID2D1HwndRenderTarget* _ID2DRenderTarget = nullptr;
 // # 매크로 함수 #
 #define SAFE_DELETE(p)			{if(p) {delete (p); (p) = nullptr;}}
 #define SAFE_DELETE_ARRAY(p)	{if(p) {delte[] (p); (p) = nullptr;}}
-#define SAFE_RELEASE(p)			{if(p) {(p)->release(); (p) = nullptr}}
+#define SAFE_RELEASE(p)			{if(p) {(p)->release(); (p) = nullptr;}}
 
 // # 전역 변수 #
 // extern -> 명시 키워드 함수의 선언 부분과 비슷하다. 선언 되어있으니 오류처리하지말구 넘어가라.

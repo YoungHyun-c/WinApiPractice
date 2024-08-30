@@ -498,4 +498,9 @@ void SetWindowSize(int x, int y, int width, int height)
 
  -> 회전축이 바뀐 상태면 상대 좌표로 이동하게 구현을 해오면 깔끔.
 
+ 한줄조사
+ -> GetAsyncKeyState()
+ -> 상태 값 -> 4가지
+ -> & 까지 알아오기
+
 */

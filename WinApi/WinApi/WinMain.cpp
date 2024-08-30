@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include <windowsx.h> // 값이 튈때 사용한다.
 
+#include "RandomFunction.h"
 
 HINSTANCE _hInstance;
 // 핸들 : 윈도우 창을 의미한다.
@@ -19,7 +20,6 @@ RECT _rc1, _rc2;
 
 int centerX;
 int centerY;
-
 
 // wWinMain world wide를 진입점으로 바꾸겠다.
 int APIENTRY WinMain(HINSTANCE hInstance,
