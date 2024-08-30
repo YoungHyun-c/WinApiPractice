@@ -45,3 +45,17 @@ inline void EllipseMakeCenter(HDC hdc, int x, int y, int width, int height)
 {
 	Ellipse(hdc, x - width / 2, y - height / 2, x + width / 2, y + height / 2);
 }
+
+
+// 내가 쓰려고 만든거
+inline void MakeCoordi(HDC hdc, int _XSize, int _YSize)
+{
+	for (int i = 0; i < _XSize; i++)
+	{
+		MoveToEx(hdc, 0, 100 * i, NULL);
+		LineTo(hdc, _YSize, 100 * i);
+
+		MoveToEx(hdc, 100 * i, 0, NULL);
+		LineTo(hdc, 100 * i, _YSize);
+	}
+}

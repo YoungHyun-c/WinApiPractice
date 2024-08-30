@@ -29,7 +29,7 @@
 #include "CommonMacroFunction.h"
 #include "RandomFunction.h"
 
-//#define RND RandomFunction::getSingleton()
+#define RND RandomFunction::getSingleton()
 
 #define WINNAME (LPSTR)(TEXT("WindowsAPI"))
 #define WINSTART_X 400

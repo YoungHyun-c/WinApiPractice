@@ -21,9 +21,9 @@ int centerY;
 
 // wWinMain world wide를 진입점으로 바꾸겠다.
 int APIENTRY WinMain(HINSTANCE hInstance,
-                     HINSTANCE hPrevInstance,
-                     LPSTR    lpszCmdParam,
-                     int       nCmdShow)
+    HINSTANCE hPrevInstance,
+    LPSTR    lpszCmdParam,
+    int       nCmdShow)
 {
     _hInstance = hInstance;
 
@@ -116,6 +116,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
         Rectangle(hdc, rc.left, rc.top, rc.right, rc.bottom);
         DrawRectMake(hdc, rc);
 
+        MakeCoordi(hdc, WINSIZE_X, WINSIZE_Y);
+
         Rectangle(hdc, _rc1.left, _rc1.top, _rc1.right, _rc1.bottom);
         Rectangle(hdc, _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
 
@@ -129,7 +131,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     case WM_MOUSEMOVE:
         pt.x = LOWORD(lParam);
         pt.y = HIWORD(lParam);
-        
+
         // pt.x = GET_X_LPARAM(lParam);
 
         InvalidateRect(hWnd, NULL, true);
@@ -161,7 +163,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
         PostQuitMessage(0);
         break;
     }
-    
+
     return (DefWindowProc(hWnd, IMessage, wParam, lParam));
 }
 

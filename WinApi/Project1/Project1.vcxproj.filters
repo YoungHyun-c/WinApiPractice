@@ -15,9 +15,6 @@
     <Filter Include="소스 파일\Utillity">
       <UniqueIdentifier>{2c49c58b-303d-4ab7-8eee-7f0f1c582cb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Utillity\Math">
-      <UniqueIdentifier>{6c716f2c-42b4-4cdc-8a3c-ee14744239f0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\PCH">
       <UniqueIdentifier>{f5526619-6320-4d1a-b87c-9e0284a0e52a}</UniqueIdentifier>
     </Filter>
@@ -32,25 +29,31 @@
     <ClCompile Include="Rect2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CommonMacroFunction.h">
-      <Filter>소스 파일\Utillity\Math</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일\PCH</Filter>
     </ClCompile>
     <ClCompile Include="Rect3.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="8_30_1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="8_30_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonMacroFunction.h">
+      <Filter>소스 파일\Utillity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>소스 파일\PCH</Filter>
+    </ClInclude>
     <ClInclude Include="RandomFunction.h">
-      <Filter>소스 파일\Utillity\Math</Filter>
+      <Filter>소스 파일\Utillity</Filter>
     </ClInclude>
     <ClInclude Include="SingletonBase.h">
       <Filter>소스 파일\SIngleton</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>소스 파일\PCH</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

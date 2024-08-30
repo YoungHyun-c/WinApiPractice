@@ -1,35 +1,37 @@
-#pragma
+#pragma once
 
 template <class T>
-class SingleTonBase
+class SingletonBase
 {
 protected:
-	static T* SingleTon;
+	static T* singleton;
+
+	SingletonBase() {};
+	~SingletonBase() {};
 
 public:
-	static T* GetSingleTon(void);
-	void releaseSingleTon(void);
+	static T* getSingleton(void);
+	void releaseSingleton(void);
 };
 
 template <typename T>
-T* SingleTonBase<T>::SingleTon = 0;
+T* SingletonBase<T>::singleton = 0;
 
-template<typename T>
-T* SingleTonBase<T>::GetSingleTon(void)
+// 가져오는 함수
+template <typename T>
+T* SingletonBase<T>::getSingleton(void)
 {
-	if (!SingleTon)
-	{
-		SingleTon = new T;
-	}
-	return SingleTon;
+	if (!singleton) singleton = new T;
+
+	return singleton;
 }
 
 template <typename T>
-void relaseSingleTon(void)
+void SingletonBase<T>::releaseSingleton(void)
 {
-	if (SingleTon)
+	if (singleton)
 	{
-		delete SingleTon;
-		SingleTon = 0;
+		delete singleton;
+		singleton = 0;
 	}
 }
