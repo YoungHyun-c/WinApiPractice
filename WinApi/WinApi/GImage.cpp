@@ -327,6 +327,135 @@ void GImage::render(HDC hdc, int destX, int destY, int sourX, int sourY, int sou
 	}
 }
 
+void GImage::AlphaRender(HDC hdc, BYTE alpha)
+{
+	if (!_blendImage) initForAlphaBlend();
+
+	_blendFunction.SourceConstantAlpha = alpha;
+
+	if (_isTrans)
+	{
+		// 1. 출력해야 될 DC에 그려져 있는 내용을 블렌드 이미지에 그린다.
+		BitBlt
+		(
+			_blendImage->hMemDC,
+			0, 0,
+			_imageInfo->width,
+			_imageInfo->height,
+			hdc,
+			0, 0,
+			SRCCOPY
+		);
+
+		// 2. 원본 이미지의 배경을 없앤 후 블렌드 이미지에 그리겠다.
+		GdiTransparentBlt
+		(
+			_blendImage->hMemDC,
+			0, 0,
+			_imageInfo->width,
+			_imageInfo->height,
+			_imageInfo->hMemDC,
+			0, 0,
+			_imageInfo->width,
+			_imageInfo->height,
+			_transColor
+		);
+
+		// 3. 블렌드 이미지를 화면에 그린다.
+		AlphaBlend
+		(
+			hdc, // 그릴 영역
+			0, 0,
+			_imageInfo->width,
+			_imageInfo->height,
+			_blendImage->hMemDC,
+			0, 0,
+			_imageInfo->width,
+			_imageInfo->height,
+			_blendFunction
+		);
+
+	}
+
+	else
+	{
+		AlphaBlend
+		(
+			hdc, // 그릴 영역
+			0, 0,
+			_imageInfo->width, _imageInfo->height,
+			_imageInfo->hMemDC,
+			0, 0,
+			_imageInfo->width, _imageInfo->height,
+			_blendFunction
+		);
+	}
+}
+
+void GImage::AlphaRender(HDC hdc, int destX, int destY, BYTE alpha)
+{
+	if (!_blendImage) initForAlphaBlend();
+
+	_blendFunction.SourceConstantAlpha = alpha;
+
+	if (_isTrans)
+	{
+		BitBlt
+		(
+			_blendImage->hMemDC,
+			0, 0,
+			_imageInfo->width,
+			_imageInfo->height,
+			hdc,
+			destX, destY,
+			SRCCOPY
+		);
+
+		GdiTransparentBlt
+		(
+			_blendImage->hMemDC,
+			0, 0,
+			_imageInfo->width,
+			_imageInfo->height,
+			_imageInfo->hMemDC,
+			0, 0,
+			_imageInfo->width,
+			_imageInfo->height,
+			_transColor
+		);
+
+		AlphaBlend
+		(
+			hdc,
+			destX, destY,
+			_imageInfo->width,
+			_imageInfo->height,
+			_blendImage->hMemDC,
+			0, 0,
+			_imageInfo->width,
+			_imageInfo->height,
+			_blendFunction
+		);
+
+	}
+
+	else
+	{
+		AlphaBlend
+		(
+			hdc,
+			destX, destY,
+			_imageInfo->width, _imageInfo->height,
+			_blendImage->hMemDC,
+			0, 0,
+			_imageInfo->width, _imageInfo->height,
+			_blendFunction
+		);
+	}
+}
+
+
+
 void GImage::renderWithAlpha(HDC hdc, BYTE alpha)
 {
 	if (!_blendImage) this->initForAlphaBlend();

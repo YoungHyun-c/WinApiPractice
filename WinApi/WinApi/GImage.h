@@ -92,6 +92,9 @@ public:
 	void frameRender(HDC hdc, int destX, int destY);
 	void frameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY);
 
+	void AlphaRender(HDC hdc, BYTE alpha);
+	void AlphaRender(HDC hdc, int destX, int destY, BYTE alpha);
+
 	// 1 인라인 함수
 	inline HDC getMemDC() { return _imageInfo->hMemDC; }
 
