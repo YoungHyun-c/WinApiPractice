@@ -218,6 +218,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
     //★★★★★
     HDC hdc; // -> Handle Device Context ->GDI를 쓰기위한 객체 -> GDI는 Grapic Device Interface로 화면처리와 그래픽등 모든 출력장치를 제어한다.
     // GDI는 BMP로 이루어져 있는데 장점으로 화소가 좋다. 단점으로 용량이 크다, A(알파, 투명도)의 부재.
+    // 원색이 강할 때 BMP가 좋다. 픽셀을 무압축하여 색을 좀더 강하게 표현하여 강조할 수 있다.
     // PNG는 보간이 이루어지는데, 두 색의 중간값을 찾아 보간한다.
     // 보간이 안들어가면 회전이 괴롭힌다? -> 마우스에 따라 회전하며 움직이는 총(ex)엔터더건전)
     // A가 생긴 GDI+가 있다.

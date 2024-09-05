@@ -8,6 +8,7 @@
 
 // 거의 사용되지 않는 내용을 Windows 헤더에서 제외 합니다. (비활성화)
 #define WIN32_LEAN_AND_MEAN
+#undef INC_OLE1
 // #undef // 매크로 지정 해제.
 //#include <ole.h> -> 회전 헤더.
 //#else
@@ -38,6 +39,12 @@
 #include <unordered_map> // 해쉬 자료구조. 해쉬-> 일반적 상황에서는 map보다 빠를 수 있다.
 // ㄴ 그 이유는 일단 중복 데이터를 허용하지 않는다.
 // ㄴ 단 유사 데이터가 많다면, 해시 충돌 발생 여부가 항상 존재한다.
+#include <bitset>
+
+using std::bitset;
+using std::vector;
+using std::string;
+using std::wstring;
 
 /*
 #include <D2D1.h>
@@ -66,21 +73,23 @@ ID2D1HwndRenderTarget* _ID2DRenderTarget = nullptr;
 // # 내가 만든 헤더 파일 #
 #include "CommonMacroFunction.h"
 #include "RandomFunction.h"
+#include "KeyManager.h"
 
 // # 디자인 패턴 #
 #define RND RandomFunction::getSingleton() // 왠만하면, 매크로가 아닌 것은 풀네임으로, 대문자로 써야된다. 언더바없이.
+#define KEYMANAGER KeyManager::getSingleton()
 
 // # 매크로 #
 #define WINNAME			(LPSTR)(TEXT("WindowsAPI"))
-#define WINSTART_X		400
-#define WINSTART_Y		400
+#define WINSTART_X		200
+#define WINSTART_Y		200
 #define WINSIZE_X		800
 #define WINSIZE_Y		800
 #define WINSTYLE		WS_CAPTION | WS_SYSMENU // 타이틀바, 오른쪽 메뉴
 
 // # 매크로 함수 #
 #define SAFE_DELETE(p)			{if(p) {delete (p); (p) = nullptr;}}
-#define SAFE_DELETE_ARRAY(p)	{if(p) {delte[] (p); (p) = nullptr;}}
+#define SAFE_DELETE_ARRAY(p)	{if(p) {delete[] (p); (p) = nullptr;}}
 #define SAFE_RELEASE(p)			{if(p) {(p)->release(); (p) = nullptr;}}
 
 // # 전역 변수 #

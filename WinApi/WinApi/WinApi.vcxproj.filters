@@ -22,6 +22,18 @@
     <Filter Include="APIFrameWork\DesignPattern\Singleton">
       <UniqueIdentifier>{01e4921f-bc5d-4ec2-bbb4-c76a01b69d97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="APIFrameWork\Core Class">
+      <UniqueIdentifier>{7e999374-715e-4e97-ad49-b586898c7f4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\Image">
+      <UniqueIdentifier>{2fc5da10-0d87-48df-8c9c-48b7335acda5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\MainClass">
+      <UniqueIdentifier>{3b10f4d8-ee8b-4e5c-b9bd-95d0f8a981c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\ManagerClass">
+      <UniqueIdentifier>{49cfe0d1-826b-460a-b1e2-ebb3835b91f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -38,6 +50,18 @@
     </ClCompile>
     <ClCompile Include="WinMainStudy.cpp">
       <Filter>APIFrameWork\WinMain</Filter>
+    </ClCompile>
+    <ClCompile Include="GameNode.cpp">
+      <Filter>APIFrameWork\Core Class</Filter>
+    </ClCompile>
+    <ClCompile Include="GImage.cpp">
+      <Filter>APIFrameWork\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>APIFrameWork\MainClass</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>APIFrameWork\ManagerClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +82,18 @@
     </ClInclude>
     <ClInclude Include="RandomFunction.h">
       <Filter>APIFrameWork\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="GameNode.h">
+      <Filter>APIFrameWork\Core Class</Filter>
+    </ClInclude>
+    <ClInclude Include="GImage.h">
+      <Filter>APIFrameWork\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>APIFrameWork\MainClass</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>APIFrameWork\ManagerClass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

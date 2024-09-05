@@ -24,6 +24,7 @@
     <ProjectGuid>{da4aab7e-ba30-49eb-bdbe-ef95b8ec1e02}</ProjectGuid>
     <RootNamespace>WinApi</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>WinApiStudy</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -137,6 +138,22 @@
   <ItemGroup>
     <ClCompile Include="C3DMatrix.cpp" />
     <ClCompile Include="C3Dvector.cpp" />
+    <ClCompile Include="GameNode.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GImage.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="WinMain.cpp">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
@@ -163,6 +180,22 @@
     <ClInclude Include="C3DMatrix.h" />
     <ClInclude Include="C3Dvector.h" />
     <ClInclude Include="CommonMacroFunction.h" />
+    <ClInclude Include="GameNode.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GImage.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="RandomFunction.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="stdafx.h" />

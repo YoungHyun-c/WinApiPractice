@@ -1,30 +1,24 @@
 // WinApiTest.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 #include "stdafx.h"
-#include <windowsx.h> // 값이 튈때 사용한다.
+//#include <windowsx.h> // 값이 튈때 사용한다.
+#include "MainGame.h"
 
 HINSTANCE _hInstance;
 // 핸들 : 윈도우 창을 의미한다.
-HWND _hwnd;
+HWND _hWnd;
 POINT _ptMouse = { 0, 0 };
+MainGame* _mg;
 
 // 함수
 // 콜백 함수
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 void SetWindowSize(int x, int y, int width, int height);
 
-RECT rc;
-RECT _rc1, _rc2;
-
-int centerX;
-int centerY;
-
 // wWinMain world wide를 진입점으로 바꾸겠다.
-int APIENTRY WinMain(HINSTANCE hInstance,
-                     HINSTANCE hPrevInstance,
-                     LPSTR    lpszCmdParam,
-                     int       nCmdShow)
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdParam, int nCmdShow)
 {
+    _mg = new MainGame();
     _hInstance = hInstance;
 
     /*
@@ -51,7 +45,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     RegisterClass(&wndClass);
 
     // 1-3 화면에 보여줄 윈도우 창 생성.
-    _hwnd = CreateWindow
+    _hWnd = CreateWindow
     (
         WINNAME,                 // 윈도우 클래스 식별자
         WINNAME,                 // 윈도우 타이틀 바 이름
@@ -68,10 +62,14 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
     SetWindowSize(WINSTART_X, WINSTART_Y, WINSIZE_X, WINSIZE_Y);
     // 1-4 화면에 윈도우창 보여주기
-    ShowWindow(_hwnd, nCmdShow);
+    ShowWindow(_hWnd, nCmdShow);
+
+    if (FAILED(_mg->init()))
+    {
+        return 0;
+    }
 
     MSG message;
-
 
     while (GetMessage(&message, 0, 0, 0))
     {
@@ -79,90 +77,15 @@ int APIENTRY WinMain(HINSTANCE hInstance,
         DispatchMessage(&message);
     }
 
+    _mg->release();
+    UnregisterClass(WINNAME, hInstance);
+
     return (int)message.wParam;
 }
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
-
-    HDC hdc;
-
-    PAINTSTRUCT ps;
-
-    static POINT pt = { 0, 0 };
-    char strPT[128] = "";
-
-    char str[] = "오케이";
-
-    switch (IMessage)
-    {
-    case WM_CREATE: // 생성자
-        rc = RectMakeCenter(400, 400, 100, 100);
-        _rc1 = RectMakeCenter(WINSIZE_X / 2 + 200, WINSIZE_Y / 2, 100, 100);
-        _rc1 = RectMakeCenter(WINSIZE_X / 2, WINSIZE_Y / 2, 100, 100);
-
-        centerX = WINSIZE_X / 2;
-        centerY = WINSIZE_Y / 2;
-
-        break;
-
-    case WM_PAINT: // 그리는기능
-    {
-        hdc = BeginPaint(hWnd, &ps);
-
-        wsprintf(strPT, "X : %d      Y : %d", pt.x, pt.y); // 숫자를 문자열로 출력할때 쓴다.
-        TextOut(hdc, 10, 10, strPT, strlen(strPT));
-
-        Rectangle(hdc, rc.left, rc.top, rc.right, rc.bottom);
-        DrawRectMake(hdc, rc);
-
-        Rectangle(hdc, _rc1.left, _rc1.top, _rc1.right, _rc1.bottom);
-        Rectangle(hdc, _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
-
-        EllipseMakeCenter(hdc, WINSIZE_X / 2, WINSIZE_Y / 2, 100, 100);
-
-        Rectangle(hdc, centerX, centerY, 100, 100);
-
-        EndPaint(hWnd, &ps);
-    }
-    break;
-    case WM_MOUSEMOVE:
-        pt.x = LOWORD(lParam);
-        pt.y = HIWORD(lParam);
-        
-        // pt.x = GET_X_LPARAM(lParam);
-
-        InvalidateRect(hWnd, NULL, true);
-        break;
-    case WM_LBUTTONDOWN:
-        centerX = RND->getInt(WINSIZE_X);
-        centerY = RND->getInt(WINSIZE_Y);
-
-        InvalidateRect(hWnd, NULL, true);
-        break;
-    case WM_RBUTTONDOWN:
-
-        break;
-    case WM_KEYDOWN:
-        switch (wParam)
-        {
-        case VK_LEFT:
-            break;
-        case VK_RIGHT:
-            break;
-        case VK_ESCAPE:
-            PostMessage(hWnd, WM_DESTROY, 0, 0);
-            break;
-        }
-        break;
-    case WM_DESTROY:
-        // PostQuitMessage : 이 함수는 메세지 큐에 QUIT 메세지를 보내는 역할을 수행.
-        // Quit 메세지를 수신하는 순간 GetMessage가 FALSE를 반환하므로 메세지 루프는 종료된다.
-        PostQuitMessage(0);
-        break;
-    }
-    
-    return (DefWindowProc(hWnd, IMessage, wParam, lParam));
+    return _mg->MainProc(hWnd, iMessage, wParam, lParam);
 }
 
 // 렌더링 최적화를 위해서 사용되는 Z 오더.
@@ -175,7 +98,7 @@ void SetWindowSize(int x, int y, int width, int height)
     AdjustWindowRect(&rc, WINSTYLE, false);
 
     // 렉트의 정보로 윈도우 사이즈 세팅.
-    SetWindowPos(_hwnd, NULL,
+    SetWindowPos(_hWnd, NULL,
         x, y,
         (rc.right - rc.left), (rc.bottom - rc.top),
         SWP_NOZORDER | SWP_NOMOVE);

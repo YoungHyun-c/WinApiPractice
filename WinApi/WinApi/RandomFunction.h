@@ -13,6 +13,7 @@ public:
 		srand(GetTickCount());
 	}
 	~RandomFunction(){}
+	HRESULT init(void) { return S_OK; }
 
 	inline int getInt(int num)
 	{

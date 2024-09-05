@@ -17,11 +17,6 @@ inline void LineMake(HDC hdc, int startX, int startY, int endX, int endY)
 {
 	MoveToEx(hdc, startX, startY, NULL);
 	LineTo(hdc, endX, endY);
-
-	Utill.h
-
-	Utill Utillity;
-	Get->Gotoxy();
 }
 
 inline RECT RectMake(int x, int y, int width, int height)
