@@ -95,5 +95,8 @@
     <ClInclude Include="KeyManager.h">
       <Filter>APIFrameWork\ManagerClass</Filter>
     </ClInclude>
+    <ClInclude Include="Work.h">
+      <Filter>APIFrameWork\WinMain</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

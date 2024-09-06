@@ -199,6 +199,7 @@
     <ClInclude Include="RandomFunction.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Work.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

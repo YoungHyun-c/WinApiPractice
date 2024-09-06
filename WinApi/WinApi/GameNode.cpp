@@ -54,6 +54,14 @@ LRESULT GameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
         _ptMouse.x = LOWORD(lParam);
         _ptMouse.y = HIWORD(lParam);
         break;
+    case WM_KEYDOWN:
+        switch (wParam)
+        {
+        case VK_ESCAPE:
+            PostMessage(hWnd, WM_DESTROY, 0, 0);
+            break;
+        }
+        break;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;

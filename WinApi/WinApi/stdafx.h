@@ -83,8 +83,8 @@ ID2D1HwndRenderTarget* _ID2DRenderTarget = nullptr;
 #define WINNAME			(LPSTR)(TEXT("WindowsAPI"))
 #define WINSTART_X		200
 #define WINSTART_Y		200
-#define WINSIZE_X		800
-#define WINSIZE_Y		800
+#define WINSIZE_X		1024
+#define WINSIZE_Y		768
 #define WINSTYLE		WS_CAPTION | WS_SYSMENU // 타이틀바, 오른쪽 메뉴
 
 // # 매크로 함수 #
