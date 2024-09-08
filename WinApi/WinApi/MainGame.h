@@ -19,15 +19,20 @@ private:
 	GImage* _AirGroundImage;
 	GImage* _WallImage;
 
+	RECT Ground;
+	RECT AirGround;
+	RECT HangGround;
+	RECT Wall;
+
 	GImage _lionImage;
 	GImage* _lionIdle;
 	GImage* _lionWalk;
 	GImage* _lionJump;
 	GImage* _lionHang;
 	GImage* _lionGetUp;
+	class Player* pPlayer;
 
 	GImage* _plImage;
-	RECT _PlayerRc;
 	RECT _GroundRc;
 	
 	int _countA, _countB;

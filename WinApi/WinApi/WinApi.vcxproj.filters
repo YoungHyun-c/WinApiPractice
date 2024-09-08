@@ -34,6 +34,9 @@
     <Filter Include="APIFrameWork\ManagerClass">
       <UniqueIdentifier>{49cfe0d1-826b-460a-b1e2-ebb3835b91f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{86aa26ed-eee1-4ad9-87b8-b1a32c196d62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -62,6 +65,12 @@
     </ClCompile>
     <ClCompile Include="KeyManager.cpp">
       <Filter>APIFrameWork\ManagerClass</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="Work.h">
       <Filter>APIFrameWork\WinMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
