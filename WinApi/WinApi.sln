@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinApi", "WinApi\WinApi.vcxproj", "{DA4AAB7E-BA30-49EB-BDBE-EF95B8EC1E02}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinApiStudy", "WinApi\WinApi.vcxproj", "{DA4AAB7E-BA30-49EB-BDBE-EF95B8EC1E02}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinApiTest", "WinApiTest\WinApiTest.vcxproj", "{6A5D112F-E7F7-4D76-8B92-2CE04745FEDB}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinApiProject", "WinApiProject\WinApiProject.vcxproj", "{CF7D3E54-1C8B-49FC-B8DC-763761FB6470}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project1", "Project1\Project1.vcxproj", "{BD527C70-228E-49E5-B4CF-FC0124B8D728}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TimeAttack2", "TimeAttack2\TimeAttack2.vcxproj", "{CECEDAB9-7992-43A5-BBDF-156F153C1FD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Release|x64.Build.0 = Release|x64
 		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Release|x86.ActiveCfg = Release|Win32
 		{BD527C70-228E-49E5-B4CF-FC0124B8D728}.Release|x86.Build.0 = Release|Win32
+		{CECEDAB9-7992-43A5-BBDF-156F153C1FD9}.Debug|x64.ActiveCfg = Debug|x64
+		{CECEDAB9-7992-43A5-BBDF-156F153C1FD9}.Debug|x64.Build.0 = Debug|x64
+		{CECEDAB9-7992-43A5-BBDF-156F153C1FD9}.Debug|x86.ActiveCfg = Debug|Win32
+		{CECEDAB9-7992-43A5-BBDF-156F153C1FD9}.Debug|x86.Build.0 = Debug|Win32
+		{CECEDAB9-7992-43A5-BBDF-156F153C1FD9}.Release|x64.ActiveCfg = Release|x64
+		{CECEDAB9-7992-43A5-BBDF-156F153C1FD9}.Release|x64.Build.0 = Release|x64
+		{CECEDAB9-7992-43A5-BBDF-156F153C1FD9}.Release|x86.ActiveCfg = Release|Win32
+		{CECEDAB9-7992-43A5-BBDF-156F153C1FD9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="API FrameWork">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="DesignPattern">
+      <UniqueIdentifier>{dd5d6638-3146-4a26-8791-73ea7c0da53a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{a6622870-9f2b-4661-9819-f6689d8713a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinMain">
+      <UniqueIdentifier>{ffb98fef-fc6c-4958-9178-ed9c6f962cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API FrameWork\MainClass">
+      <UniqueIdentifier>{32591ca2-6fe3-4532-8960-80b84a233f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API FrameWork\Utility">
+      <UniqueIdentifier>{45536c7e-5cb9-4499-87ab-33e774314696}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreClass">
+      <UniqueIdentifier>{389e11d2-784d-4781-bec2-486307f52600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API FrameWork\ManagerClass">
+      <UniqueIdentifier>{8ccd464c-b8a9-4408-93a7-90f14d507023}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonMacroFunction.h">
+      <Filter>API FrameWork\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomFunction.h">
+      <Filter>API FrameWork\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="GameNode.h">
+      <Filter>CoreClass</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>API FrameWork\MainClass</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>API FrameWork\ManagerClass</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>WinMain</Filter>
+    </ClCompile>
+    <ClCompile Include="GameNode.cpp">
+      <Filter>CoreClass</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>API FrameWork\MainClass</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>API FrameWork\ManagerClass</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
