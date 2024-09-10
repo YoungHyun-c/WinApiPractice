@@ -5,18 +5,117 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="과제">
+      <UniqueIdentifier>{8b743a97-cd84-4c76-8456-ba92bd7dc120}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="과제\01.윈도우 창 만들기">
+      <UniqueIdentifier>{6b14d52f-3496-451a-a403-11a3781130c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="과제\02. 이름 + 구구단 + 애플로고">
+      <UniqueIdentifier>{08cc043b-1bee-44ea-ba75-7b688d8b7857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="과제\03. 오망성 + 사각형 2개 Move, 사각형 영혼 넣기">
+      <UniqueIdentifier>{33f12823-7641-4a62-8101-979ef96008b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="과제\04.사각형 4단밀기 + 마우스 무작위 도형출력 + 얼굴그리기 + 도형 회전">
+      <UniqueIdentifier>{d72e4684-7735-4a76-8527-656e85d89190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="과제\05.API프레임워크 구축%28타임어택2%29 + 두더지게임 + 클레이 사격">
+      <UniqueIdentifier>{cb3b2501-80ee-4c13-8894-568608287035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="과제\06.슬라이스게임 + 미니맵 + 회오리 총알 + 블랙홀 + 지렁이">
+      <UniqueIdentifier>{89bea2ea-5353-4775-8002-5b4953232985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="과제\08.캐릭터 벽잡기 + API큐브 전개">
+      <UniqueIdentifier>{6b1428e0-8e2f-42de-8bd2-b1265e1c1cfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="과제\07.MetalSlug + Kirijo">
+      <UniqueIdentifier>{29996cb4-88be-441f-8eea-aec7588d73d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="APITest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="01.MyName%28O%29.cpp">
+      <Filter>과제\02. 이름 + 구구단 + 애플로고</Filter>
+    </ClCompile>
+    <ClCompile Include="02.GuGuDan%28O%29.cpp">
+      <Filter>과제\02. 이름 + 구구단 + 애플로고</Filter>
+    </ClCompile>
+    <ClCompile Include="03.AppleLogo%28O%29.cpp">
+      <Filter>과제\02. 이름 + 구구단 + 애플로고</Filter>
+    </ClCompile>
+    <ClCompile Include="01.Pentagram%28O%29.cpp">
+      <Filter>과제\03. 오망성 + 사각형 2개 Move, 사각형 영혼 넣기</Filter>
+    </ClCompile>
+    <ClCompile Include="02.Rect2Move%28O%29.cpp">
+      <Filter>과제\03. 오망성 + 사각형 2개 Move, 사각형 영혼 넣기</Filter>
+    </ClCompile>
+    <ClCompile Include="03.RectSoul%28O%29.cpp">
+      <Filter>과제\03. 오망성 + 사각형 2개 Move, 사각형 영혼 넣기</Filter>
+    </ClCompile>
+    <ClCompile Include="04.DiagramRotation%28X%29.cpp">
+      <Filter>과제\04.사각형 4단밀기 + 마우스 무작위 도형출력 + 얼굴그리기 + 도형 회전</Filter>
+    </ClCompile>
+    <ClCompile Include="03.MyFace%28X%29.cpp">
+      <Filter>과제\04.사각형 4단밀기 + 마우스 무작위 도형출력 + 얼굴그리기 + 도형 회전</Filter>
+    </ClCompile>
+    <ClCompile Include="01.TiemAttack.cpp">
+      <Filter>과제\01.윈도우 창 만들기</Filter>
+    </ClCompile>
+    <ClCompile Include="01.Rect4.(X).cpp">
+      <Filter>과제\04.사각형 4단밀기 + 마우스 무작위 도형출력 + 얼굴그리기 + 도형 회전</Filter>
+    </ClCompile>
+    <ClCompile Include="01.TimeAttack2%28O%29.cpp">
+      <Filter>과제\05.API프레임워크 구축%28타임어택2%29 + 두더지게임 + 클레이 사격</Filter>
+    </ClCompile>
+    <ClCompile Include="02.MoleGame%28X%29.cpp">
+      <Filter>과제\05.API프레임워크 구축%28타임어택2%29 + 두더지게임 + 클레이 사격</Filter>
+    </ClCompile>
+    <ClCompile Include="Clay_Shooting(X).cpp">
+      <Filter>과제\05.API프레임워크 구축%28타임어택2%29 + 두더지게임 + 클레이 사격</Filter>
+    </ClCompile>
+    <ClCompile Include="01.SliceGame(X).cpp">
+      <Filter>과제\06.슬라이스게임 + 미니맵 + 회오리 총알 + 블랙홀 + 지렁이</Filter>
+    </ClCompile>
+    <ClCompile Include="02.MiniMap(X).cpp">
+      <Filter>과제\06.슬라이스게임 + 미니맵 + 회오리 총알 + 블랙홀 + 지렁이</Filter>
+    </ClCompile>
+    <ClCompile Include="03.RotationBullet(X).cpp">
+      <Filter>과제\06.슬라이스게임 + 미니맵 + 회오리 총알 + 블랙홀 + 지렁이</Filter>
+    </ClCompile>
+    <ClCompile Include="04.BlackHole(X).cpp">
+      <Filter>과제\06.슬라이스게임 + 미니맵 + 회오리 총알 + 블랙홀 + 지렁이</Filter>
+    </ClCompile>
+    <ClCompile Include="05.Snake(X).cpp">
+      <Filter>과제\06.슬라이스게임 + 미니맵 + 회오리 총알 + 블랙홀 + 지렁이</Filter>
+    </ClCompile>
+    <ClCompile Include="01.MetalSlug(X).cpp">
+      <Filter>과제\07.MetalSlug + Kirijo</Filter>
+    </ClCompile>
+    <ClCompile Include="02.Kirijo(X).cpp">
+      <Filter>과제\07.MetalSlug + Kirijo</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="02.RandomDiagram%28O%29.cpp">
+      <Filter>과제\04.사각형 4단밀기 + 마우스 무작위 도형출력 + 얼굴그리기 + 도형 회전</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CommonMacroFunction.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomFunction.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

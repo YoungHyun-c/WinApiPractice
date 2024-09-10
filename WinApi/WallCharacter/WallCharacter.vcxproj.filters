@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="APIFrameWork">
+      <UniqueIdentifier>{c300856d-7f1e-46b5-a745-73155547a585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\MainClass">
+      <UniqueIdentifier>{5b8b865b-41e4-40cf-98b4-00758f33551d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\CoreClass">
+      <UniqueIdentifier>{6dad00c8-73b5-4c37-85c6-c86c4799b01a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\DesignPattern">
+      <UniqueIdentifier>{397aa884-5f6a-4c34-88a4-a8a4bcab4754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\Image">
+      <UniqueIdentifier>{6ad5e662-a786-4792-8b71-e38fcfded12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\ManagerClass">
+      <UniqueIdentifier>{d1accf73-8db8-438e-82ab-7ec66f28215a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\PCH">
+      <UniqueIdentifier>{325e53c7-26b7-4c81-8fec-4b0624fcd173}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\Utility">
+      <UniqueIdentifier>{8d4985aa-c614-4168-b197-35928a9d9113}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\WinMain">
+      <UniqueIdentifier>{8c310d66-bcb0-4911-be4d-4618544793d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{9e1b1184-cfac-4a16-bfd6-780e860e4eb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\DesignPattern\Singleton">
+      <UniqueIdentifier>{f576e34f-ca22-4f12-81ce-c20aeba106b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="APIFrameWork\Utility\Math">
+      <UniqueIdentifier>{80758a13-7af1-4640-b945-dcae4265794e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameNode.h">
+      <Filter>APIFrameWork\CoreClass</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>APIFrameWork\DesignPattern\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="GImage.h">
+      <Filter>APIFrameWork\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>APIFrameWork\MainClass</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>APIFrameWork\ManagerClass</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>APIFrameWork\PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="C3DMatrix.h">
+      <Filter>APIFrameWork\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C3DVector.h">
+      <Filter>APIFrameWork\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonMacroFunction.h">
+      <Filter>APIFrameWork\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomFunction.h">
+      <Filter>APIFrameWork\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameNode.cpp">
+      <Filter>APIFrameWork\CoreClass</Filter>
+    </ClCompile>
+    <ClCompile Include="GImage.cpp">
+      <Filter>APIFrameWork\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>APIFrameWork\MainClass</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>APIFrameWork\ManagerClass</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>APIFrameWork\PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>APIFrameWork\WinMain</Filter>
+    </ClCompile>
+    <ClCompile Include="C3DMatrix.cpp">
+      <Filter>APIFrameWork\Utility\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C3DVector.cpp">
+      <Filter>APIFrameWork\Utility\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

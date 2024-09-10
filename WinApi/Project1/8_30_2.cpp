@@ -16,8 +16,11 @@ void SetWindowSize(int x, int y, int width, int height);
 RECT rc;
 RECT _rc1, _rc2;
 
+int X;
+int Y;
 int centerX;
 int centerY;
+
 
 // wWinMain world wide를 진입점으로 바꾸겠다.
 int APIENTRY WinMain(HINSTANCE hInstance,
@@ -84,63 +87,69 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT IMessage, WPARAM wParam, LPARAM lParam)
 {
-
     HDC hdc;
 
     PAINTSTRUCT ps;
-
     static POINT pt = { 0, 0 };
+    int Ran = 0;
+    int Point = RND->getFromInTo(3, 6);
+    int RanNum = RND->getInt(WINSIZE_X);
+    const POINT Test[5] = {X,Y,centerX,centerY,RanNum};
+    
     char strPT[128] = "";
 
-    char str[] = "오케이";
 
     switch (IMessage)
     {
     case WM_CREATE: // 생성자
-        rc = RectMakeCenter(400, 400, 100, 100);
-        _rc1 = RectMakeCenter(WINSIZE_X / 2 + 200, WINSIZE_Y / 2, 100, 100);
-        _rc1 = RectMakeCenter(WINSIZE_X / 2, WINSIZE_Y / 2, 100, 100);
 
         centerX = WINSIZE_X / 2;
         centerY = WINSIZE_Y / 2;
+        X = RND->getInt(WINSIZE_X / 2);
+        Y = RND->getInt(WINSIZE_Y / 2);
 
         break;
 
     case WM_PAINT: // 그리는기능
-    {
         hdc = BeginPaint(hWnd, &ps);
 
         wsprintf(strPT, "X : %d      Y : %d", pt.x, pt.y); // 숫자를 문자열로 출력할때 쓴다.
         TextOut(hdc, 10, 10, strPT, strlen(strPT));
 
-        Rectangle(hdc, rc.left, rc.top, rc.right, rc.bottom);
-        DrawRectMake(hdc, rc);
-
-        MakeCoordi(hdc, WINSIZE_X, WINSIZE_Y);
-
-        Rectangle(hdc, _rc1.left, _rc1.top, _rc1.right, _rc1.bottom);
-        Rectangle(hdc, _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
-
-        EllipseMakeCenter(hdc, WINSIZE_X / 2, WINSIZE_Y / 2, 100, 100);
-
-        Rectangle(hdc, centerX, centerY, 100, 100);
+        //Rectangle(hdc, centerX, centerY, 100, 100);
 
         EndPaint(hWnd, &ps);
-    }
-    break;
+        break;
     case WM_MOUSEMOVE:
         pt.x = LOWORD(lParam);
         pt.y = HIWORD(lParam);
-
-        // pt.x = GET_X_LPARAM(lParam);
-
-        InvalidateRect(hWnd, NULL, true);
         break;
     case WM_LBUTTONDOWN:
+        hdc = GetDC(hWnd);
+
+        Ran = RND->getInt(3);
+        switch (Ran)
+        {
+        case 0:
+            Rectangle(hdc, X, Y, centerX, centerY);
+            break;
+        case 1:
+            EllipseMake(hdc, X, Y, centerX, centerY);
+            break;
+        case 2:
+            Polygon(hdc, Test, Point);  
+            break;
+        }
+
+
         centerX = RND->getInt(WINSIZE_X);
         centerY = RND->getInt(WINSIZE_Y);
+        X = RND->getInt(WINSIZE_X / 2);
+        Y = RND->getInt(WINSIZE_Y / 2);
+        RanNum = RND->getInt(WINSIZE_X);
+        
+        ReleaseDC(hWnd, hdc);
 
-        InvalidateRect(hWnd, NULL, true);
         break;
     case WM_RBUTTONDOWN:
 

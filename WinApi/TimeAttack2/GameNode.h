@@ -1,20 +1,19 @@
 #pragma once
 
 // Ό³Έν :
-class GameNode
+class GameNode abstract
 {
 public:
 	// constructer destructer
-	GameNode();
-	~GameNode();
+	GameNode() {};
+	virtual ~GameNode() {};
 
-	// delete Function
-	GameNode(const GameNode& _Other) = delete;
-	GameNode(GameNode&& _Other) noexcept = delete;
-	GameNode& operator = (const GameNode& _Other) = delete;
-	GameNode& operator = (GameNode&& _Other) noexcept = delete;
+	virtual HRESULT init(void);
+	virtual void Render(HDC hdc);
+	virtual void Update(void);
+	virtual void Release(void);
 
-protected:
+	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 
 private:
 

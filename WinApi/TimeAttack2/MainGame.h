@@ -1,22 +1,20 @@
 #pragma once
+#include "GameNode.h"
 
 // Ό³Έν :
-class MainGame
+class MainGame : public GameNode
 {
 public:
 	// constructer destructer
-	MainGame();
-	~MainGame();
+	MainGame() {};
+	~MainGame() {};
 
-	// delete Function
-	MainGame(const MainGame& _Other) = delete;
-	MainGame(MainGame&& _Other) noexcept = delete;
-	MainGame& operator = (const MainGame& _Other) = delete;
-	MainGame& operator = (MainGame&& _Other) noexcept = delete;
-
-protected:
+	HRESULT init(void) override;
+	void Render(HDC hdc) override;
+	void Release(void) override;
+	void Update(void) override;
 
 private:
-
+	RECT rc;
 };
 

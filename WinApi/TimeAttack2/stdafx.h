@@ -35,6 +35,7 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
+#include <bitset>
 
 using std::vector;
 using std::string;
@@ -44,10 +45,11 @@ using std::wstring;
 // # 내가 만든 헤더 파일 #
 #include "CommonMacroFunction.h"
 #include "RandomFunction.h"
+#include "KeyManager.h"
 
 // # 디자인 패턴 #
 #define RND RandomFunction::getSingleton() // 디자인패턴의 매크로 이름은 풀네임으로 정상적으로 작성 (RANDOMFUNCTION)
-
+#define KEYMANAGER KeyManager::getSingleton()
 
 // # 매크로 #
 
